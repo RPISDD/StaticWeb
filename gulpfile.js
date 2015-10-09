@@ -24,6 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var polybuild = require('polybuild');
+var awspublish = require('gulp-awspublish');
 
 var AUTOPREFIXER_BROWSERS = [
   'ie >= 10',
@@ -269,6 +270,21 @@ gulp.task('default', ['clean'], function (cb) {
     ['jshint', 'images', 'fonts', 'html'],
     'vulcanize','rename-index', // 'cache-config',
     cb);
+});
+
+// Deploy web application to S3 bucket
+gulp.task('publish', function() {
+  var publisher = awspublish.create({
+    params: {
+      Bucket: 'timeshift-static'
+    }
+  });
+
+  return gulp.src('./*')
+    .pipe(awspublish.gzip({ ext: '.gz' }))
+    .pipe(publish.publish())
+    .pipe(publisher.cache())
+    .pipe(awspublish.reporter());
 });
 
 // Load tasks for web-component-tester
