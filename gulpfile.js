@@ -24,6 +24,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var polybuild = require('polybuild');
+var fs = require('fs');
 var awspublish = require('gulp-awspublish');
 
 var AUTOPREFIXER_BROWSERS = [
@@ -274,16 +275,12 @@ gulp.task('default', ['clean'], function (cb) {
 
 // Deploy web application to S3 bucket
 gulp.task('publish', function() {
-  var publisher = awspublish.create({
-    params: {
-      Bucket: 'timeshift-static'
-    }
-  });
+  var credentials = JSON.parse(fs.readFileSync('aws-credentials.json', 'utf8'));
+  var publisher = awspublish.create(credentials);
 
-  return gulp.src('./*')
-    .pipe(awspublish.gzip({ ext: '.gz' }))
-    .pipe(publish.publish())
-    .pipe(publisher.cache())
+  return gulp.src('./dist/**')
+    .pipe(publisher.publish())
+    .pipe(publisher.sync())
     .pipe(awspublish.reporter());
 });
 
