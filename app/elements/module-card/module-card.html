@@ -17,7 +17,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <div>Hello from <span>{{foo}}</span></div>
+    <paper-card heading={{module_name}}>
+    <div>{{module_description}}</div>
+    </paper-card>
   </template>
   <script>
   (function() {
@@ -27,11 +29,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'module-card',
 
       properties: {
-        foo: {
+        module_description: {
+          type: String,
+          value: 'module-card parent element',
+          notify: true
+        },
+        module_name: {
           type: String,
           value: 'module-card',
-          notify: true
-        }
+          nofity: true
+        },
       }
     });
   })();
