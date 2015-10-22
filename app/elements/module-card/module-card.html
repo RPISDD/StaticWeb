@@ -8,9 +8,9 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 
-<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
 
-<dom-module id="module-card">
+<dom-module id='module-card'>
   <template>
     <style>
       :host {
@@ -18,15 +18,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       paper-card {
         width: 100%;
-        min-height: 300px;
+        min-height: 150px;
       }
       .module-description {
         padding: 16px;
       }
     </style>
-    <paper-card heading={{moduleName}}>
-    <div class="module-description">{{moduleDescription}}</div>
+    <div class='module-card'>
+      <paper-card heading={{module.moduleName}}>
+      <div class='module-description'>{{module.moduleDescription}}</div>
     </paper-card>
+  </div>
   </template>
   <script>
   (function() {
@@ -36,16 +38,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'module-card',
 
       properties: {
-        moduleDescription: {
-          type: String,
-          value: 'module-card parent element',
-          notify: true
-        },
-        moduleName: {
-          type: String,
-          value: 'module-card',
-          nofity: true
-        },
+        module: {
+          type: Object
+        } 
       },
     });
   })();

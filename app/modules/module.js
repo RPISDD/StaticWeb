@@ -12,8 +12,7 @@ var tsModule = function(){
 
   //Function to initialize card
   that.initCard = function(cardRef){
-    cardRef.moduleDescription = that.moduleDescription;
-    cardRef.moduleName = that.moduleName;
+    cardRef.module = that;
   }
 
   return that;
