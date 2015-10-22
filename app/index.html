@@ -12,6 +12,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <html lang="">
 
 <head>
+  <!-- TimeShift Module Script Loader -->
+  <link rel='import' href='modules/modules.html'>
+
   <meta charset="utf-8">
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -120,7 +123,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <iron-pages attr-for-selected="data-route" selected="{{route}}">
 
             <section data-route="home">
-              <module-card></module-card>
+              <module-card-generator></module-card-generator>
             </section>
 
             <section data-route="users">

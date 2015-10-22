@@ -10,38 +10,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
-<dom-module id="module-card-test">
+<dom-module id="module-card-generator">
   <template>
     <style>
       :host {
         display: block;
       }
     </style>
-    <paper-material>
-      <div id='titleDiv'>
-        <h2 class='page-title'>{{module_title}}</h2>
-      </div>
-      <div>Hello from <span>{{foo}}</span></div>
-    </paper-material>
+    <div id='cardHolder'></div>
   </template>
   <script>
   (function() {
     'use strict';
 
     Polymer({
-      is: 'module-card-test',
-
-      properties: {
-        foo: {
-          type: String,
-          value: 'module-card-test',
-          notify: true
-        },
-        module_title: {
-          type: String,
-          value: 'test',
-          nofity: true
-        },
+      is: 'module-card-generator',
+      properties: {},
+      ready: function(){
+        for(var index in moduleList){
+          var module = moduleList[index]();
+          var card = document.createElement('module-card');
+          module.initCard(card);
+          this.$.cardHolder.appendChild(card);
+        }
       }
     });
   })();

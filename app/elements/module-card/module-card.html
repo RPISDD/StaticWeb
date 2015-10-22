@@ -16,9 +16,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      paper-card {
+        width: 100%;
+        min-height: 300px;
+      }
+      .module-description {
+        padding: 16px;
+      }
     </style>
-    <paper-card heading={{module_name}}>
-    <div>{{module_description}}</div>
+    <paper-card heading={{moduleName}}>
+    <div class="module-description">{{moduleDescription}}</div>
     </paper-card>
   </template>
   <script>
@@ -29,17 +36,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'module-card',
 
       properties: {
-        module_description: {
+        moduleDescription: {
           type: String,
           value: 'module-card parent element',
           notify: true
         },
-        module_name: {
+        moduleName: {
           type: String,
           value: 'module-card',
           nofity: true
         },
-      }
+      },
     });
   })();
   </script>
