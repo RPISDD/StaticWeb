@@ -28,9 +28,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       properties: {},
       ready: function(){
         for(var index in moduleList){
-          var module = moduleList[index]();
+          var module = moduleList[index];
           var card = document.createElement('module-card');
-          module.initCard(card);
+          module.initCard(module, card);
           this.$.cardHolder.appendChild(card);
         }
       }

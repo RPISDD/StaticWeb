@@ -1,0 +1,30 @@
+<!doctype HTML>
+<html>
+<head>
+  <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
+  <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
+  <!-- endbuild -->
+  <link rel='import' href='assets.html'> 
+</head>
+<body unresolved class='fullbleed layout vertical'>
+  <dom-module id='ts-welcome'>
+    <template>
+    </template>
+    <script>
+      Polymer({
+          is: 'ts-welcome'
+      });
+    </script>
+  </dom-module>
+  <template is='dom-bind' id='landing'>
+    <paper-toolbar id='mainToolbar' class='tall'>
+      <div class='center horizontal layout'>
+        <div class='app-name'>TimeShift</div>
+      </div>
+    </paper-toolbar>
+    <div class='content'>
+      Hello,world
+    </div>
+  </template>
+</body>
+</html>

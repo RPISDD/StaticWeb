@@ -9,9 +9,13 @@ var tsModule = function(){
   //Module Metadata
   that.moduleName = 'ts-module';
   that.moduleDescription = 'The base class for TimeShift Polymer Modules';
+  that.modulePage = null;
+  that.modulePageElement = null;
+  that.moduleIronIcon = 'extension';
 
   //Function to initialize card
-  that.initCard = function(cardRef){
+  //Take that as an argument so we get static method behavior
+  that.initCard = function(that, cardRef){
     cardRef.module = that;
   }
 
