@@ -1,6 +1,6 @@
 //Functional Class
 var tsModule = function(){
-  that = {};
+  var that = {};
 
   //API Endpoint Configuration
   that.endpointHead = 'https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/';
@@ -17,7 +17,7 @@ var tsModule = function(){
   //Take that as an argument so we get static method behavior
   that.initCard = function(that, cardRef){
     cardRef.module = that;
-  }
+  };
 
   return that;
-}
+};
