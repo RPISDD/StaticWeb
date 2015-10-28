@@ -1,3 +1,4 @@
+/* exported tsModule */
 //Functional Class
 var tsModule = function(){
   var obj = {};
@@ -8,7 +9,7 @@ var tsModule = function(){
   obj.endpointURL = function(){
     var url = obj.endpointHead + obj.endpointTail;
     return url;
-  }
+  };
   obj.ajaxResources = null;
   //Module Metadata
   obj.moduleName = 'ts-module';
