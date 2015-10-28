@@ -1,16 +1,16 @@
 var tsModuleTest = function(){
-  that = tsModule();
-  that.endpointTail = 'test';
-  that.moduleName = 'Test TS Module';
-  that.moduleDescription = 'A module to test polymer high-level elements';
-  that.modulePage = 'test';
-  that.modulePageElement = 'test-page';
+  obj = tsModule();
+  obj.endpointTail = 'test';
+  obj.moduleName = 'Test TS Module';
+  obj.moduleDescription = 'A module to test polymer high-level elements';
+  obj.modulePage = 'test';
+  obj.modulePageElement = 'test-page';
 
   // AJAX Resources
-  that.ajaxResources = {
-    root: that.endpointURL(),
-    test: that.endpointURL() + '/testdb'
+  obj.ajaxResources = {
+    root: obj.endpointURL(),
+    test: obj.endpointURL() + '/testdb'
   };
 
-  return that;
+  return obj;
 }
