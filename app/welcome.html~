@@ -49,7 +49,7 @@
     <template>
         <form id="form" method="post" >
     		<fieldset>
-    			<div id="msg">Please register below:</div>
+    			<div id="msg">Please login below:</div>
     		</fieldset>
 		    <fieldset name="email">
 		      <label for="email">Email</label>
