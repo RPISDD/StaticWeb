@@ -11,14 +11,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
 
 <dom-module id='test-page'>
+  <!-- Contains the source code for the web page -->
   <template>
     <!-- This is a Demo of using Iron Ajax -->
     <iron-ajax
       auto
-      id="ajaxDemo"
-      url="[[module.ajaxResources.root]]"
-      last-response="{{ajaxResponse}}"
-      handle-as="json">
+      id='ajaxDemo'
+      url='[[module.ajaxResources.root]]'
+      last-response='{{ajaxResponse}}'
+      handle-as='json'>
     </iron-ajax>
     <style>
       :host {
@@ -35,20 +36,24 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     Polymer({
       is: 'test-page',
 
+      // Internal variables for this DOM element
       properties: {
+        // The javascript object for this module, 
+        // declared in app/modules/test.js
         module: {
           type: Object,
           reflectToAttribute: true
         },
+        // This value is set by the iron-ajax element
         ajaxResponse: {
+          // Data type
           type: String,
-          value: "Loading...",
+          // Default value
+          value: 'Loading...',
+          // Update page when value changes
           notify: true
         },
       },
-      ready: function() {
-        console.log('Module: ', this.module);
-      }
     });
   })();
   </script>
