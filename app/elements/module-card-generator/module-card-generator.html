@@ -27,6 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       is: 'module-card-generator',
       properties: {},
       ready: function(){
+        /* global moduleList */
         for(var index in moduleList){
           var module = moduleList[index];
           var card = document.createElement('module-card');
