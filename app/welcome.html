@@ -10,6 +10,9 @@
   <dom-module id='ts-welcome'>
     <template>
     <!-- Insert content for landing page here -->
+    <div class='content'>
+      Hello,world
+    </div>
     </template>
     <script>
       Polymer({
@@ -43,9 +46,17 @@
         <div class='app-name'>TimeShift</div>
       </div>
     </paper-toolbar>
-    <div class='content'>
-      Hello,world
-    </div>
+    <iron-pages id='welcomeRouter' attr-for-selected='welcome-route' selected='{{welcomeRoute}}'>
+      <section data-route='welcome'>
+        <ts-welcome></ts-welcome>
+      </section>
+      <section data-route='login'>
+        <ts-login></ts-login>
+      </section>
+      <section data-route='signup'>
+        <ts-signup></ts-signup>
+      </section>
+    </iron-pages>
   </template>
 </body>
 </html>
