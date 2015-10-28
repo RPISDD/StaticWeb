@@ -5,7 +5,12 @@ var tsModule = function(){
   //API Endpoint Configuration
   that.endpointHead = 'https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/';
   that.endpointTail = 'core';
-
+  that.endpointURL = function(){
+    var url = that.endpointHead + that.endpointTail;
+    console.log('Computed URL: ', url);
+    return url;
+  }
+  that.ajaxResources = null;
   //Module Metadata
   that.moduleName = 'ts-module';
   that.moduleDescription = 'The base class for TimeShift Polymer Modules';

@@ -15,9 +15,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
   <!-- endbuild -->
-  <link rel='import' href='assets.html'> 
-  <!-- Configure your routes here --> 
-  <link rel='import' href='elements/routing-app.html'> 
+  <link rel='import' href='assets.html'>
+  <!-- Configure your routes here -->
+  <link rel='import' href='elements/routing-app.html'>
 </head>
 
 <body unresolved class='fullbleed layout vertical'>
@@ -57,7 +57,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     app.route = module.modulePage;
                     app.params = module;
                   });
-                })(module); 
+                })(module);
                 // Add a link for the navigation menu
                 var link = document.createElement('a');
                 link.setAttribute('data-route', module.modulePage);
@@ -73,7 +73,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 // Add a title
                 var linkTitle = document.createElement('span');
                 linkTitle.innerText = module.moduleName;
-                link.appendChild(linkTitle);
+                Polymer.dom(link).appendChild(linkTitle);
 
                 // Attach link to menu
                 Polymer.dom(navMenu).appendChild(link);
@@ -127,15 +127,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                   // Create a new page element
                   var modulePage = document.createElement('module-page');
                   // Associate new page with module
+                  console.log('Setting module: ', module);
                   modulePage.module = module;
                   modulePage.loadChild();
                   // Create a new section of app for page
                   var section = document.createElement('section');
                   section.setAttribute('data-route', module.modulePage);
                   // Attach new page to new section
-                  section.appendChild(modulePage);
+                  Polymer.dom(section).appendChild(modulePage);
                   // Attach section to application
                   Polymer.dom(pageRouter).appendChild(section);
+                  Polymer.dom.flush()
                 })(moduleList[index]);
               }
             })();

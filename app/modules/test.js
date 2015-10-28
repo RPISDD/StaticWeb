@@ -6,5 +6,11 @@ var tsModuleTest = function(){
   that.modulePage = 'test';
   that.modulePageElement = 'test-page';
 
+  // AJAX Resources
+  that.ajaxResources = {
+    root: that.endpointURL(),
+    test: that.endpointURL() + '/testdb'
+  };
+
   return that;
 }

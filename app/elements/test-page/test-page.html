@@ -12,12 +12,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <dom-module id='test-page'>
   <template>
+    <!-- This is a Demo of using Iron Ajax -->
+    <iron-ajax
+      auto
+      id="ajaxDemo"
+      url="[[module.ajaxResources.root]]"
+      last-response="{{ajaxResponse}}"
+      handle-as="json">
+    </iron-ajax>
     <style>
       :host {
         display: block;
       }
     </style>
-    <p>HELLO WORLD</p>
+    <p>HELLO WORLD from <span>[[module.ajaxResources.root]]</span>:</p>
+    <p>[[ajaxResponse]]</p>
   </template>
   <script>
   (function() {
@@ -28,8 +37,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       properties: {
         module: {
-          type: Object
+          type: Object,
+          reflectToAttribute: true
         },
+        ajaxResponse: {
+          type: String,
+          value: "Loading...",
+          notify: true
+        },
+      },
+      ready: function() {
+        console.log('Module: ', this.module);
       }
     });
   })();
