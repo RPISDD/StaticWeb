@@ -7,7 +7,6 @@ var tsModule = function(){
   that.endpointTail = 'core';
   that.endpointURL = function(){
     var url = that.endpointHead + that.endpointTail;
-    console.log('Computed URL: ', url);
     return url;
   }
   that.ajaxResources = null;

@@ -36,13 +36,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         },
       },
       loadChild: function(){
-          console.log('Loaded module: ', this.module);
-          console.log('Creating element of type: ', this.module.modulePageElement);
           var childPage = document.createElement(this.module.modulePageElement);
           childPage.module = this.module;
-          console.log('Created child page: ', childPage);
           Polymer.dom(this.$.pageContent).appendChild(childPage);
-          console.log('Appended child page to: ', this.$.pageContent);
       },
     });
   })();
