@@ -26,10 +26,10 @@
     <script>
       function switchLogin() {
            landing.welcomeRoute='login';
-      } 
+      }
       function switchSignup() {
            landing.welcomeRoute='signup';
-      }   
+      }
       Polymer({
           is: 'ts-welcome'
       });
@@ -45,15 +45,15 @@
           <button type="submit">Login</button>
         </form>
     </template>
-    <script>  
+    <script>
       function submitForm() {
           document.getElementById('loginForm').submit();
       }
       Polymer({
-          is: 'ts-login'  
+          is: 'ts-login'
       });
     </script>
-  </dom-module> 
+  </dom-module>
   <dom-module id='ts-signup'>
     <template>
 	  <link rel="stylesheet" href="welcome.css">
@@ -71,7 +71,7 @@
 				<input type="password" id="password" autocomplete="off" placeholder="***">
 			</fieldset>
 			<input type="submit" value="Login">
-		</form>       
+		</form>
     </template>
     <script>
       Polymer({
@@ -98,12 +98,10 @@
     </iron-pages>
   </template>
   <script>
-  <!-- Load the welcome page by default -->
+    <!-- Load the welcome page by default -->
     window.addEventListener('WebComponentsReady', function() {
       landing.welcomeRoute='welcome';
     });
   </script>
-
-	
 </body>
 </html>
