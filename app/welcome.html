@@ -4,14 +4,32 @@
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
   <!-- endbuild -->
-  <link rel='import' href='assets.html'> 
+  <link rel='import' href='assets.html'>
+  <style shim-shadowdom>
+  paper-button.colored {
+    color: #4285f4;
+  }
+  paper-button[raised].colored {
+     background: #4285f4;
+     color: #fff;
+  }
+</style>
 </head>
 <body unresolved class='fullbleed layout vertical'>
   <dom-module id='ts-welcome'>
     <template>
-    <h1>Welcome to Timeshift!</h1>
+    <p>Welcome to TimeShift! We can see that you're not currently logged in. Existing users can login here:
+    <paper-button raised onclick="switchLogin()"><br>Login<br></paper-button>
+    While new users can create an account here:
+    <paper-button raised onclick="switchSignup()"><br>Signup<br></paper-button></p>
     </template>
     <script>
+      function switchLogin() {
+           landing.welcomeRoute='login';
+      } 
+      function switchSignup() {
+           landing.welcomeRoute='signup';
+      }   
       Polymer({
           is: 'ts-welcome'
       });
@@ -19,58 +37,41 @@
   </dom-module>
   <dom-module id='ts-login'>
     <template>
-    <form id="form" method="post" >
-    		<fieldset>
-    			<div id="msg">Please login below:</div>
-    		</fieldset>
-		    <fieldset name="email">
-		      <label for="email">Email</label>
-		      <input type="email" name="email" id="email" placeholder="{{email_placeholder}}" value="{{email}}">
-		      <div class="status" id="email_status"></div>
-		    </fieldset>
-
-		   	<fieldset name="password">
-		      <label for="password">Password</label>
-		      <input type="password" name="password"  id="password">
-		      <div class="status" id="password_status"></div>
-		    </fieldset>
-		    <fieldset>
-		    	<input type="submit" id="submit" value="Login">
-			</fieldset>
-		</form>
+        <form is="iron-form" id="loginForm" method="post" action="/">
+          <paper-input name="email" label="Email" required></paper-input>
+          <br>
+          <paper-input name="password" label="Password" required></paper-input>
+          <br>
+          <button type="submit">Login</button>
+        </form>
     </template>
-    <script>
+    <script>  
+      function submitForm() {
+          document.getElementById('loginForm').submit();
+      }
       Polymer({
-          is: 'ts-login'
+          is: 'ts-login'  
       });
     </script>
   </dom-module> 
   <dom-module id='ts-signup'>
     <template>
-        <form id="form" method="post" >
-    		<fieldset>
-    			<div id="msg">Please register below:</div>
-    		</fieldset>
-		    <fieldset name="email">
-		      <label for="email">Email</label>
-		      <input type="email" name="email" id="email" placeholder="{{email_placeholder}}" value="{{email}}">
-		      <div class="status" id="email_status"></div>
-		    </fieldset>
-		      <fieldset name="password">
-		      <label for="password">Password</label>
-		      <input type="password" name="password"  id="password">
-		      <div class="status" id="password_status"></div>
-		    </fieldset>
-		      <fieldset name="cpassword">
-		      <label for="cpassword">Confirm Password</label>
-		      <input type="cpassword" name="cpassword"  id="cpassword">
-		      <div class="status" id="cpassword_status"></div>
-		    </fieldset>
-		    <fieldset>
-		    	<input type="submit" id="submit" value="Register">
+	  <link rel="stylesheet" href="welcome.css">
+		<form id="registerForm">
+			<fieldset name="email">
+				<label for="email">Email</label>
+				<input type="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="email@domain.com">
 			</fieldset>
-		</form>
-    </template>
+			<fieldset name="password">
+				<label for="password">Password</label>
+				<input type="password" id="password" autocomplete="off" placeholder="***">
+			</fieldset>
+			<fieldset name="password">
+				<label for="password">Confirm Password</label>
+				<input type="password" id="password" autocomplete="off" placeholder="***">
+			</fieldset>
+			<input type="submit" value="Login">
+		</form>       
     </template>
     <script>
       Polymer({
@@ -84,11 +85,25 @@
         <div class='app-name'>TimeShift</div>
       </div>
     </paper-toolbar>
-    <div class='content'>
-      Hello,world
-    </div>
+    <iron-pages id='welcomeRouter' attr-for-selected='data-route' selected='{{welcomeRoute}}'>
+      <section data-route='welcome'>
+        <ts-welcome></ts-welcome>
+      </section>
+      <section data-route='login'>
+        <ts-login></ts-login>
+      </section>
+      <section data-route='signup'>
+        <ts-signup></ts-signup>
+      </section>
+    </iron-pages>
+  </template>
+  <script>
+  <!-- Load the welcome page by default -->
+    window.addEventListener('WebComponentsReady', function() {
+      landing.welcomeRoute='welcome';
+    });
+  </script>
+
+	
 </body>
-</template>
-    <script>
-    </script>
 </html>
