@@ -6,22 +6,34 @@
   <!-- endbuild -->
   <link rel='import' href='assets.html'>
   <style shim-shadowdom>
-  paper-button.colored {
-    color: #4285f4;
-  }
-  paper-button[raised].colored {
-     background: #4285f4;
-     color: #fff;
-  }
-</style>
+    paper-button.colored {
+      color: #4285f4;
+    }
+    paper-button[raised].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+  </style>
 </head>
 <body unresolved class='fullbleed layout vertical'>
   <dom-module id='ts-welcome'>
     <template>
-    <p>Welcome to TimeShift! We can see that you're not currently logged in. Existing users can login here:
-    <paper-button raised onclick='switchLogin()'><br>Login<br></paper-button>
-    While new users can create an account here:
-    <paper-button raised onclick='switchSignup()'><br>Signup<br></paper-button></p>
+      <style>
+        paper-card {
+          display: flex;
+          max-width: 200px;
+          padding: 10px;
+          margin: auto;
+          @apply(--layout-center);
+        }
+      </style>
+      <div>
+        <p>Welcome to TimeShift! We can see that you're not currently logged in.</p>
+        <paper-card>
+          <div><paper-button raised onclick='switchLogin()'>Login</paper-button></div>
+          <div><paper-button raised onclick='switchSignup()'>Signup</paper-button></div>
+        </paper-card>
+      </div>
     </template>
     <script>
       function switchLogin() {
