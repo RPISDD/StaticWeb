@@ -1,3 +1,4 @@
 // List of references to module classes
-//var moduleList = [tsModuleTest];
+/* exported moduleList */
+/* globals tsModuleTest: true */
 var moduleList = [tsModuleTest()];

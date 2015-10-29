@@ -107,7 +107,10 @@ gulp.task('jshint', function () {
   return jshintTask([
       'app/scripts/**/*.js',
       'app/elements/**/*.js',
+      'app/modules/**/*.js',
       'app/elements/**/*.html',
+      'app/welcome.html',
+      'app/index.html',
       'gulpfile.js'
     ])
     .pipe($.jshint.extract()) // Extract JS from .html files
@@ -146,11 +149,15 @@ gulp.task('copy', function () {
   var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
     .pipe(gulp.dest('dist/sw-toolbox'));
 
+  var modScripts = gulp.src(['app/modules/**/*.html',
+                             'app/modules/**/*.js'])
+      .pipe(gulp.dest('dist/modules'));
+
   var vulcanized = gulp.src(['app/elements/elements.html'])
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, vulcanized, swBootstrap, swToolbox)
+  return merge(app, bower, elements, modScripts, vulcanized, swBootstrap, swToolbox)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -255,6 +262,7 @@ gulp.task('serve', ['styles', 'elements', 'images'], function () {
   });
 
   gulp.watch(['app/**/*.html'], reload);
+  gulp.watch(['app/**/*.js'], reload);
   gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
   gulp.watch(['app/elements/**/*.css'], ['elements', reload]);
   gulp.watch(['app/{scripts,elements}/**/{*.js,*.html}'], ['jshint']);
@@ -291,7 +299,7 @@ gulp.task('default', ['clean'], function (cb) {
     ['copy', 'styles'],
     'elements',
     ['jshint', 'images', 'fonts', 'html'],
-    'vulcanize','rename-index', 'remove-old-build-index', // 'cache-config',
+    'rename-index', 'remove-old-build-index', // 'cache-config',
     cb);
 });
 

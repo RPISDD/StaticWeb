@@ -1,5 +1,7 @@
+/* exported tsModuleTest */
+/* globals tsModule */
 var tsModuleTest = function(){
-  obj = tsModule();
+  var obj = tsModule();
   obj.endpointTail = 'test';
   obj.moduleName = 'Test TS Module';
   obj.moduleDescription = 'A module to test polymer high-level elements';
@@ -13,4 +15,4 @@ var tsModuleTest = function(){
   };
 
   return obj;
-}
+};
