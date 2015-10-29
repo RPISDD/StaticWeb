@@ -19,9 +19,9 @@
   <dom-module id='ts-welcome'>
     <template>
     <p>Welcome to TimeShift! We can see that you're not currently logged in. Existing users can login here:
-    <paper-button raised onclick="switchLogin()"><br>Login<br></paper-button>
+    <paper-button raised onclick='switchLogin()'><br>Login<br></paper-button>
     While new users can create an account here:
-    <paper-button raised onclick="switchSignup()"><br>Signup<br></paper-button></p>
+    <paper-button raised onclick='switchSignup()'><br>Signup<br></paper-button></p>
     </template>
     <script>
       function switchLogin() {
@@ -37,12 +37,12 @@
   </dom-module>
   <dom-module id='ts-login'>
     <template>
-        <form is="iron-form" id="loginForm" method="post" action="/">
-          <paper-input name="email" label="Email" required></paper-input>
+        <form is='iron-form' id='loginForm' method='post' action='/'>
+          <paper-input name='email' label='Email' required></paper-input>
           <br>
-          <paper-input name="password" label="Password" required></paper-input>
+          <paper-input name='password' label='Password' required></paper-input>
           <br>
-          <button type="submit">Login</button>
+          <paper-button raised type='submit'>Login</paper-button>
         </form>
     </template>
     <script>
@@ -56,21 +56,21 @@
   </dom-module>
   <dom-module id='ts-signup'>
     <template>
-	  <link rel="stylesheet" href="welcome.css">
-		<form id="registerForm">
-			<fieldset name="email">
-				<label for="email">Email</label>
-				<input type="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="email@domain.com">
+	  <link rel='stylesheet' href='welcome.css'>
+		<form is='iron-form' id='registerForm'>
+			<fieldset name='email'>
+				<label for='email'>Email</label>
+				<paper-input type='email' id='email' pattern='[^ @]*@[^ @]*' placeholder='email@domain.com'></paper-input>
 			</fieldset>
-			<fieldset name="password">
-				<label for="password">Password</label>
-				<input type="password" id="password" autocomplete="off" placeholder="***">
+			<fieldset name='password'>
+				<label for='password'>Password</label>
+				<paper-input type='password' id='password' autocomplete='off' placeholder='***'></paper-input>
 			</fieldset>
-			<fieldset name="password">
-				<label for="password">Confirm Password</label>
-				<input type="password" id="password" autocomplete="off" placeholder="***">
+			<fieldset name='password'>
+				<label for='password'>Confirm Password</label>
+				<paper-input type='password' id='password' autocomplete='off' placeholder='***'></paper-input>
 			</fieldset>
-			<input type="submit" value="Login">
+			<paper-button raised>Submit</paper-button>
 		</form>
     </template>
     <script>
