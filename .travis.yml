@@ -1,0 +1,8 @@
+language: node_js
+node_js:
+    - "v4.2.1"
+before_script:
+    - npm install -g gulp
+script: gulp
+notifications:
+  slack: rpissdd:NAnaR3RhZdC0WySzNnGYMbix

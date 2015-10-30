@@ -46,25 +46,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               app.scrollPageToTop();
               next();
             }
+            var registerModule = function(module){
+              page('/' + module.modulePage, scrollToTop, function(){
+                app.route = module.modulePage;
+                app.params = module;
+              });
+            };
             // Iterate over module list
+            /* global moduleList */
             for(var index in moduleList){
               var module = moduleList[index];
               // Check if module needs a page
-              if(module.modulePage != null){
+              if(module.modulePage !== null){
                 // Register module with router
-                (function(module){
-                  page('/' + module.modulePage, scrollToTop, function(){
-                    app.route = module.modulePage;
-                    app.params = module;
-                  });
-                })(module);
+                registerModule(module);
                 // Add a link for the navigation menu
                 var link = document.createElement('a');
                 link.setAttribute('data-route', module.modulePage);
                 link.setAttribute('href', '/' + module.modulePage);
                 link.setAttribute('on-click', 'onDataRouteClick');
                 // Add an icon
-                if(module.moduleIronIcon != null){
+                if(module.moduleIronIcon !== null){
                   var icon = document.createElement('iron-icon');
                   icon.setAttribute('icon', module.moduleIronIcon);
                   link.appendChild(icon);
@@ -76,6 +78,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 Polymer.dom(link).appendChild(linkTitle);
 
                 // Attach link to menu
+                /* global navMenu */
                 Polymer.dom(navMenu).appendChild(link);
               }
             }
@@ -117,27 +120,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <script>
             // Create pages for modules that need pages
             (function(){
+              var createPage = function(module){
+                // Skip modules that don't need pages
+                if(module.modulePage === null){
+                  return;
+                }
+                // Create a new page element
+                var modulePage = document.createElement('module-page');
+                // Associate new page with module
+                modulePage.module = module;
+                modulePage.loadChild();
+                // Create a new section of app for page
+                var section = document.createElement('section');
+                section.setAttribute('data-route', module.modulePage);
+                // Attach new page to new section
+                Polymer.dom(section).appendChild(modulePage);
+                // Attach section to application
+                /* global pageRouter */
+                Polymer.dom(pageRouter).appendChild(section);
+                Polymer.dom.flush();
+              };
               // Iterate over modules
               for(var index in moduleList){
-                (function(module){
-                  // Skip modules that don't need pages
-                  if(module.modulePage == null){
-                    return;
-                  }
-                  // Create a new page element
-                  var modulePage = document.createElement('module-page');
-                  // Associate new page with module
-                  modulePage.module = module;
-                  modulePage.loadChild();
-                  // Create a new section of app for page
-                  var section = document.createElement('section');
-                  section.setAttribute('data-route', module.modulePage);
-                  // Attach new page to new section
-                  Polymer.dom(section).appendChild(modulePage);
-                  // Attach section to application
-                  Polymer.dom(pageRouter).appendChild(section);
-                  Polymer.dom.flush()
-                })(moduleList[index]);
+                createPage(moduleList[index]);
               }
             })();
           </script>
