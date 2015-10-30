@@ -2,6 +2,7 @@ sudo: false
 language: node_js
 node_js:
     - "v0.10.36"
+    - "v4.2.1"
 before_script:
     - npm install -g gulp
 script: gulp
