@@ -1,5 +1,10 @@
 <!doctype HTML>
 <html>
+  <!--
+      TODO: Charles - integrate globally-scoped functions with Polymer
+      See switchLogin for an example.
+      https://www.polymer-project.org/1.0/docs/devguide/events.html
+  -->
 <head>
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
@@ -30,20 +35,23 @@
       <div>
         <p>Welcome to TimeShift! We can see that you're not currently logged in.</p>
         <paper-card>
-          <div><paper-button raised onclick='switchLogin()'>Login</paper-button></div>
+          <div><paper-button raised on-click='switchLogin'>Login</paper-button></div>
           <div><paper-button raised onclick='switchSignup()'>Signup</paper-button></div>
         </paper-card>
       </div>
     </template>
     <script>
-      function switchLogin() {
-           landing.welcomeRoute='login';
-      }
-      function switchSignup() {
+      /* global landing */
+      /* exported switchSignup */
+      var switchSignup = function() {
            landing.welcomeRoute='signup';
-      }
+      };
       Polymer({
-          is: 'ts-welcome'
+          is: 'ts-welcome',
+          // Load the login page
+          switchLogin: function() {
+            landing.welcomeRoute='login';
+          }
       });
     </script>
   </dom-module>
@@ -58,9 +66,10 @@
         </form>
     </template>
     <script>
-      function submitForm() {
+      /* exported submitForm */
+      var submitForm = function() {
           document.getElementById('loginForm').submit();
-      }
+      };
       Polymer({
           is: 'ts-login'
       });
@@ -109,8 +118,8 @@
       </section>
     </iron-pages>
   </template>
+  <!-- Load the welcome page by default -->
   <script>
-    <!-- Load the welcome page by default -->
     window.addEventListener('WebComponentsReady', function() {
       landing.welcomeRoute='welcome';
     });
