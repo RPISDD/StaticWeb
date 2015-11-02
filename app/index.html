@@ -74,7 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 }
                 // Add a title
                 var linkTitle = document.createElement('span');
-                linkTitle.innerText = module.moduleName;
+                linkTitle.innerHTML = module.moduleName;
                 Polymer.dom(link).appendChild(linkTitle);
 
                 // Attach link to menu
