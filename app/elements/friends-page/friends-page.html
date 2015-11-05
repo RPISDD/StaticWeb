@@ -25,15 +25,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       :host {
         display: block;
       }
+      .friendcard{
+	margin-bottom: 16px;
+	padding: 16px;
+      }
     </style>
     <!--<p>HELLO WORLD from <span>[[module.ajaxResources.root]]</span></p> -->
     <template is="dom-repeat" items = "[[ajaxResponse]]">
-      <style>
-	.friendcard{
-	margin-bottom: 16px;
-	padding: 16px;
-	}
-      </style>
       <paper-material class='friendcard' elevation="2">  
 	<!--<div>Index: <span>{{index}}</span></div> -->
 	<div><span>{{item}}</span></div>
