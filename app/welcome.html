@@ -82,6 +82,7 @@
           ready: function(){
               this.$.loginForm.addEventListener('iron-form-response',function(data){
                   console.log(data.detail.parseResponse());
+      window.location = '/';
               });
           },
           switchWelcome: function() {
@@ -118,6 +119,7 @@
 	  },
           submitForm: function() {
              document.getElementById('signupForm').submit();
+      window.location = '/';
           }
       });
     </script>

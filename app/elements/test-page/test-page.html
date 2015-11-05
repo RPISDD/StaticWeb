@@ -26,8 +26,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
     </style>
-    <p>HELLO WORLD from <span>[[module.ajaxResources.root]]</span>:</p>
-    <p>[[ajaxResponse]]</p>
+    <p>HELLO WORLD from <span>[[module.ajaxResources.root]]</span></p>
+    <template is="dom-repeat" items = "[[ajaxResponse]]">
+      <style>
+	.friendcard{
+	margin-bottom: 16px;
+	padding: 16px;
+	}
+      </style>
+      <paper-material class='friendcard' elevation="2">  
+	<!--<div>Index: <span>{{index}}</span></div> -->
+	<div><span>{{item}}</span></div>
+      </paper-material>
+    </template>
   </template>
   <script>
   (function() {
@@ -49,7 +60,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // Data type
           type: String,
           // Default value
-          value: 'Loading...',
+          value: [],
           // Update page when value changes
           notify: true
         },
