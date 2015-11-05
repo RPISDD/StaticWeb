@@ -82,7 +82,9 @@
           ready: function(){
               this.$.loginForm.addEventListener('iron-form-response',function(data){
                   console.log(data.detail.parseResponse());
-      window.location = '/';
+      localStorage.setItem("tsToken", data.detail.parseResponse());
+      
+      
               });
           },
           switchWelcome: function() {
@@ -90,6 +92,8 @@
 	  },
           submitForm: function() {
              document.getElementById('loginForm').submit();
+      window.location = '/';
+
           },
           testing: function(data) {
              console.log(data);
@@ -99,7 +103,7 @@
   </dom-module>
   <dom-module id='ts-signup'>
      <template>
-        <form is='iron-form' id='signupForm' method='post' action='/'>
+        <form is='iron-form' id='signupForm' method='post' action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login'>
           <paper-input name='first' label='First' required></paper-input>
 	  <paper-input name='last' label='Last' required></paper-input>
           <paper-input name='rin' label='RIN' required></paper-input>
