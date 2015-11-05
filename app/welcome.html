@@ -60,7 +60,7 @@
     <template>
         <form is='iron-form' id='loginForm' method='post' action='/'>
           <paper-input name='email' label='Email' required></paper-input>
-          <paper-input name='password' label='Password' required></paper-input>
+          <paper-input type ='password' name='password' label='Password' required></paper-input>
           <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
           <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
         </form>
@@ -88,7 +88,7 @@
           <paper-input name='email' label='Email' required></paper-input>
           <paper-input type ='password' name='password' label='Password' required></paper-input>
 	  <paper-input type ='password' name='confirm' label='Confim Password' required></paper-input>
-          <paper-input type = name='crn' label='Class CRNs, seperated by a space' required ></paper-input>
+          <paper-input name='crn' label='Class CRNs, seperated by a space' required ></paper-input>
           <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
           <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
         </form>
