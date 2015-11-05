@@ -1,10 +1,5 @@
 <!doctype HTML>
 <html>
-  <!--
-      TODO: Charles - integrate globally-scoped functions with Polymer
-      See switchLogin for an example.
-      https://www.polymer-project.org/1.0/docs/devguide/events.html
-  -->
 <head>
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
@@ -44,30 +39,23 @@
       /* global landing */
       /* exported switchSignup */
       Polymer({
-          is: 'ts-welcome',
-          // Load the login page
-          switchLogin: function() {
-            landing.welcomeRoute='login';
-          },
-	  switchSignup: function() {
-	    landing.welcomeRoute='signup';
-          }
+        is: 'ts-welcome',
+        // Load the login page
+        switchLogin: function() {
+          landing.welcomeRoute='login';
+        },
+	      switchSignup: function() {
+	        landing.welcomeRoute='signup';
+        }
       });
     </script>
   </dom-module>
   <dom-module id='ts-login'>
     <template>
-      <!--<iron-ajax
-	 id='ajaxLogin'
-	 url=
-	 last-response='{{loginResponse}}'
-	 handle-as='json'>
-      </iron-ajax>-->
-      <form is='iron-form' 
-	    id='loginForm' 
-	    method='post' 
-	    action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login' 
-	    on-response='testing'>
+      <form is='iron-form' id='loginForm' method='post' 
+	      action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login'
+	      on-response='testing'>
+
         <paper-input name='email' label='Email' required></paper-input>
         <paper-input type ='password' name='password' label='Password' required></paper-input>
         <div><paper-button raised on-click='submitForm'>Log in</paper-button>
@@ -76,24 +64,20 @@
     </template>
     <script>
       /* exported submitForm */
-      
       Polymer({
-      is: 'ts-login',
+        is: 'ts-login',
           ready: function(){
-              this.$.loginForm.addEventListener('iron-form-response',function(data){
-                  console.log(data.detail.parseResponse());
-      localStorage.setItem('tsToken', data.detail.parseResponse());
-      
-      
-              });
+            this.$.loginForm.addEventListener('iron-form-response',function(data){
+              console.log(data.detail.parseResponse());
+              localStorage.setItem('tsToken', data.detail.parseResponse());
+            });
           },
           switchWelcome: function() {
             landing.welcomeRoute='welcome';
-	  },
+          },
           submitForm: function() {
-             document.getElementById('loginForm').submit();
-      window.location = '/';
-
+            document.getElementById('loginForm').submit();
+            window.location = '/';
           },
           testing: function(data) {
              console.log(data);
@@ -103,28 +87,33 @@
   </dom-module>
   <dom-module id='ts-signup'>
      <template>
-        <form is='iron-form' id='signupForm' method='post' action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login'>
+        <form is='iron-form' id='signupForm' method='post' 
+          action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login'>
+          
           <paper-input name='first' label='First' required></paper-input>
-	  <paper-input name='last' label='Last' required></paper-input>
+	        <paper-input name='last' label='Last' required></paper-input>
           <paper-input name='rin' label='RIN' required></paper-input>
           <paper-input name='email' label='Email' required></paper-input>
-          <paper-input type ='password' name='password' label='Password' required></paper-input>
-	  <paper-input type ='password' name='confirm' label='Confim Password' required></paper-input>
-          <paper-input name='crn' label='Class CRNs, seperated by a space' required ></paper-input>
+          <paper-input type ='password' name='password' label='Password' required>
+          </paper-input>
+	        <paper-input type ='password' name='confirm' label='Confim Password' required>
+          </paper-input>
+          <paper-input name='crn' label='Class CRNs, seperated by a space' required >
+          </paper-input>
           <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
           <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
         </form>
     </template>
     <script>
       Polymer({
-          is: 'ts-signup',
-          switchWelcome: function() {
-            landing.welcomeRoute='welcome';
-	  },
-          submitForm: function() {
-             document.getElementById('signupForm').submit();
-      window.location = '/';
-          }
+        is: 'ts-signup',
+        switchWelcome: function() {
+          landing.welcomeRoute='welcome';
+	      },
+        submitForm: function() {
+          document.getElementById('signupForm').submit();
+          window.location = '/';
+        }
       });
     </script>
   </dom-module>
