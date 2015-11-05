@@ -33,7 +33,7 @@
         }
       </style>
       <div>
-        <p>Welcome to TimeShift! We can see that you're not currently logged in.</p>
+        <center><p>Welcome to TimeShift! We can see that you're not currently logged in.</p></center>
         <paper-card>
           <div><paper-button raised on-click='switchLogin'>Login</paper-button></div>
           <div><paper-button raised on-click='switchSignup'>Signup</paper-button></div>
@@ -57,22 +57,41 @@
   </dom-module>
   <dom-module id='ts-login'>
     <template>
-        <form is='iron-form' id='loginForm' method='post' action='/'>
-          <paper-input name='email' label='Email' required></paper-input>
-          <paper-input type ='password' name='password' label='Password' required></paper-input>
-          <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
+      <!--<iron-ajax
+	 id='ajaxLogin'
+	 url=
+	 last-response='{{loginResponse}}'
+	 handle-as='json'>
+      </iron-ajax>-->
+      <form is='iron-form' 
+	    id='loginForm' 
+	    method='post' 
+	    action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login' 
+	    on-response='testing'>
+        <paper-input name='email' label='Email' required></paper-input>
+        <paper-input type ='password' name='password' label='Password' required></paper-input>
+        <div><paper-button raised on-click='submitForm'>Log in</paper-button>
           <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
-        </form>
+      </form>
     </template>
     <script>
       /* exported submitForm */
+      
       Polymer({
-          is: 'ts-login',
+      is: 'ts-login',
+          ready: function(){
+              this.$.loginForm.addEventListener('iron-form-response',function(data){
+                  console.log(data.detail.parseResponse());
+              });
+          },
           switchWelcome: function() {
             landing.welcomeRoute='welcome';
 	  },
           submitForm: function() {
              document.getElementById('loginForm').submit();
+          },
+          testing: function(data) {
+             console.log(data);
           }
       });
     </script>
