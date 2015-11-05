@@ -36,21 +36,22 @@
         <p>Welcome to TimeShift! We can see that you're not currently logged in.</p>
         <paper-card>
           <div><paper-button raised on-click='switchLogin'>Login</paper-button></div>
-          <div><paper-button raised onclick='switchSignup()'>Signup</paper-button></div>
+          <div><paper-button raised on-click='switchSignup'>Signup</paper-button></div>
         </paper-card>
       </div>
     </template>
     <script>
       /* global landing */
       /* exported switchSignup */
-      var switchSignup = function() {
-           landing.welcomeRoute='signup';
-      };
       Polymer({
           is: 'ts-welcome',
           // Load the login page
           switchLogin: function() {
             landing.welcomeRoute='login';
+          },
+
+	  switchSignup: function() {
+	    landing.welcomeRoute='signup';
           }
       });
     </script>
@@ -59,44 +60,49 @@
     <template>
         <form is='iron-form' id='loginForm' method='post' action='/'>
           <paper-input name='email' label='Email' required></paper-input>
-          <br>
           <paper-input name='password' label='Password' required></paper-input>
-          <br>
-          <paper-button raised type='submit'>Login</paper-button>
+          <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
+          <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
         </form>
     </template>
     <script>
       /* exported submitForm */
-      var submitForm = function() {
-          document.getElementById('loginForm').submit();
-      };
       Polymer({
-          is: 'ts-login'
+          is: 'ts-login',
+          switchWelcome: function() {
+            landing.welcomeRoute='welcome';
+	  },
+
+          submitForm: function() {
+             document.getElementById('loginForm').submit();
+          }
       });
     </script>
   </dom-module>
   <dom-module id='ts-signup'>
-    <template>
-	  <link rel='stylesheet' href='styles/welcome.css'>
-		<form is='iron-form' id='registerForm'>
-			<fieldset name='email'>
-				<label for='email'>Email</label>
-				<paper-input type='email' id='email' pattern='[^ @]*@[^ @]*' placeholder='email@domain.com'></paper-input>
-			</fieldset>
-			<fieldset name='password'>
-				<label for='password'>Password</label>
-				<paper-input type='password' id='password' autocomplete='off' placeholder='***'></paper-input>
-			</fieldset>
-			<fieldset name='password'>
-				<label for='password'>Confirm Password</label>
-				<paper-input type='password' id='password' autocomplete='off' placeholder='***'></paper-input>
-			</fieldset>
-			<paper-button raised>Submit</paper-button>
-		</form>
+     <template>
+        <form is='iron-form' id='signupForm' method='post' action='/'>
+          <paper-input name='first' label='First' required></paper-input>
+	  <paper-input name='last' label='Last' required></paper-input>
+          <paper-input name='rin' label='RIN' required></paper-input>
+          <paper-input name='email' label='Email' required></paper-input>
+          <paper-input type ='password' name='password' label='Password' required></paper-input>
+	  <paper-input type ='password' name='confirm' label='Confim Password' required></paper-input>
+          <paper-input type = name='crn' label='Class CRNs, seperated by a space' required ></paper-input>
+          <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
+          <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
+        </form>
     </template>
     <script>
       Polymer({
-          is: 'ts-signup'
+          is: 'ts-signup',
+          switchWelcome: function() {
+            landing.welcomeRoute='welcome';
+	  },
+
+          submitForm: function() {
+             document.getElementById('signupForm').submit();
+          }
       });
     </script>
   </dom-module>
