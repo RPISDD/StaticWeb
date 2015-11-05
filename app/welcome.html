@@ -1,42 +1,108 @@
 <!doctype HTML>
 <html>
+  <!--
+      TODO: Charles - integrate globally-scoped functions with Polymer
+      See switchLogin for an example.
+      https://www.polymer-project.org/1.0/docs/devguide/events.html
+  -->
 <head>
   <!-- build:js bower_components/webcomponentsjs/webcomponents-lite.min.js -->
   <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
   <!-- endbuild -->
-  <link rel='import' href='assets.html'> 
+  <link rel='import' href='assets.html'>
+  <style shim-shadowdom>
+    paper-button.colored {
+      color: #4285f4;
+    }
+    paper-button[raised].colored {
+      background: #4285f4;
+      color: #fff;
+    }
+  </style>
 </head>
 <body unresolved class='fullbleed layout vertical'>
   <dom-module id='ts-welcome'>
     <template>
-    <!-- Insert content for landing page here -->
-    <div class='content'>
-      <p>Hello,world</p>
-    </div>
+      <style>
+        paper-card {
+          display: flex;
+          max-width: 200px;
+          padding: 10px;
+          margin: auto;
+          @apply(--layout-center);
+        }
+      </style>
+      <div>
+        <p>Welcome to TimeShift! We can see that you're not currently logged in.</p>
+        <paper-card>
+          <div><paper-button raised on-click='switchLogin'>Login</paper-button></div>
+          <div><paper-button raised on-click='switchSignup'>Signup</paper-button></div>
+        </paper-card>
+      </div>
     </template>
     <script>
+      /* global landing */
+      /* exported switchSignup */
       Polymer({
-          is: 'ts-welcome'
+          is: 'ts-welcome',
+          // Load the login page
+          switchLogin: function() {
+            landing.welcomeRoute='login';
+          },
+
+	  switchSignup: function() {
+	    landing.welcomeRoute='signup';
+          }
       });
     </script>
   </dom-module>
   <dom-module id='ts-login'>
     <template>
-    <!-- Insert content for login page here -->
+        <form is='iron-form' id='loginForm' method='post' action='/'>
+          <paper-input name='email' label='Email' required></paper-input>
+          <paper-input type ='password' name='password' label='Password' required></paper-input>
+          <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
+          <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
+        </form>
     </template>
     <script>
+      /* exported submitForm */
       Polymer({
-          is: 'ts-login'
+          is: 'ts-login',
+          switchWelcome: function() {
+            landing.welcomeRoute='welcome';
+	  },
+
+          submitForm: function() {
+             document.getElementById('loginForm').submit();
+          }
       });
     </script>
-  </dom-module> 
+  </dom-module>
   <dom-module id='ts-signup'>
-    <template>
-    <!-- Insert content for signup page here -->
+     <template>
+        <form is='iron-form' id='signupForm' method='post' action='/'>
+          <paper-input name='first' label='First' required></paper-input>
+	  <paper-input name='last' label='Last' required></paper-input>
+          <paper-input name='rin' label='RIN' required></paper-input>
+          <paper-input name='email' label='Email' required></paper-input>
+          <paper-input type ='password' name='password' label='Password' required></paper-input>
+	  <paper-input type ='password' name='confirm' label='Confim Password' required></paper-input>
+          <paper-input name='crn' label='Class CRNs, seperated by a space' required ></paper-input>
+          <div><paper-button raised on-click='submitForm'>Sign Up</paper-button>
+          <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
+        </form>
     </template>
     <script>
       Polymer({
-          is: 'ts-signup'
+          is: 'ts-signup',
+          switchWelcome: function() {
+            landing.welcomeRoute='welcome';
+	  },
+
+          submitForm: function() {
+             document.getElementById('signupForm').submit();
+          }
       });
     </script>
   </dom-module>
@@ -58,5 +124,11 @@
       </section>
     </iron-pages>
   </template>
+  <!-- Load the welcome page by default -->
+  <script>
+    window.addEventListener('WebComponentsReady', function() {
+      landing.welcomeRoute='welcome';
+    });
+  </script>
 </body>
 </html>

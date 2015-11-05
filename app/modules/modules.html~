@@ -1,0 +1,6 @@
+<script src='./module.js'></script>
+<script src='./test.js'></script>
+<script src='./login.js'></script>
+
+<!-- Loads array of module references. This must come last -->
+<script src='./module-list.js'></script>
