@@ -32,11 +32,35 @@
   </dom-module> 
   <dom-module id='ts-signup'>
     <template>
-    <!-- Insert content for signup page here -->
+      <iron-ajax
+	 id='signupAjax'
+	 url= 'https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/signup'
+	 handle-as='json'>
+      </iron-ajax>
+	  <link rel='stylesheet' href='styles/welcome.css'>
+	  <form is='iron-form' id='registerForm'>
+	    <fieldset name='email'>
+	      <label for='email'>Email</label>
+	      <paper-input type='email' id='email' pattern='[^ @]*@[^ @]*' placeholder='email@domain.com' value="{{pwinput}}"></paper-input>
+	    </fieldset>
+	    <fieldset name='password'>
+	      <label for='password'>Password</label>
+	      <paper-input type='password' id='password' autocomplete='off' placeholder='***' value="{{pwinput}}"></paper-input>
+	    </fieldset>
+	    <fieldset name='password'>
+	      <label for='password'>Confirm Password</label>
+	      <paper-input type='password' id='password' autocomplete='off' placeholder='***' value="{{pwinput}}"></paper-input>
+	    </fieldset>
+	    <paper-button raised on-click="handleClick">Submit</paper-button>
+	  </form>
     </template>
     <script>
       Polymer({
-          is: 'ts-signup'
+          is: 'ts-signup',
+    
+          handleClick: function(){
+      
+          }
       });
     </script>
   </dom-module>
