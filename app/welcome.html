@@ -82,7 +82,7 @@
           ready: function(){
               this.$.loginForm.addEventListener('iron-form-response',function(data){
                   console.log(data.detail.parseResponse());
-      localStorage.setItem("tsToken", data.detail.parseResponse());
+      localStorage.setItem('tsToken', data.detail.parseResponse());
       
       
               });
