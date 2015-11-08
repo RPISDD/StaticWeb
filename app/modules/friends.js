@@ -11,6 +11,7 @@ var tsModuleFriends = function(){
   // AJAX Resources
   obj.ajaxResources = {
     root: obj.endpointURL()
+    //TODO: dedicated friends list resource
   };
 
   return obj;

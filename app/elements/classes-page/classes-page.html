@@ -26,25 +26,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         display: block;
       }
       .classcard{
-	margin-bottom: 16px;
-	padding: 16px;
+	      margin-bottom: 16px;
+	      padding: 16px;
       }
     </style>
-    <!--<p>HELLO WORLD from <span>[[module.ajaxResources.root]]</span></p> -->
     <template is="dom-repeat" items = "[[ajaxResponse]]">
       <paper-material class='classcard' elevation="2">  
-	<!--<div>Index: <span>{{index}}</span></div> -->
-	<div><span>{{item}}</span></div>
+	      <div><span>{{item}}</span></div>
       </paper-material>
     </template>
   </template>
   <script>
   (function() {
     'use strict';
-
     Polymer({
       is: 'classes-page',
-
       // Internal variables for this DOM element
       properties: {
         // The javascript object for this module, 
