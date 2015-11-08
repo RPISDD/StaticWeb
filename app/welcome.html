@@ -65,25 +65,25 @@
     <script>
       Polymer({
         is: 'ts-login',
-          ready: function(){
-            this.$.loginForm.addEventListener('iron-form-response',function(data){
-              var token = data.detail;
-              console.log('Recvd token: ', token); //TODO: remove
-              //TODO: validate token
-              // Set token
-              localStorage.setItem('tsToken', JSON.stringify(token));
-              // Debug logging
-              console.log('Token: ', localStorage.getItem('tsToken'));
-              // Load main website
-              window.location = '/';
-            });
-          },
-          switchWelcome: function() {
-            landing.welcomeRoute='welcome';
-          },
-          submitForm: function() {
-            this.$.loginForm.submit();
-          }
+        ready: function(){
+          this.$.loginForm.addEventListener('iron-form-response',function(data){
+            var token = data.detail;
+            console.log('Recvd token: ', token); //TODO: remove
+            //TODO: validate token
+            // Set token
+            localStorage.setItem('tsToken', JSON.stringify(token));
+            // Debug logging
+            console.log('Token: ', localStorage.getItem('tsToken'));
+            // Load main website
+            window.location = '/';
+          });
+        },
+        switchWelcome: function() {
+          landing.welcomeRoute='welcome';
+        },
+        submitForm: function() {
+          this.$.loginForm.submit();
+        }
       });
     </script>
   </dom-module>
@@ -114,7 +114,6 @@
 	      },
         submitForm: function() {
           document.getElementById('signupForm').submit();
-          window.location = '/';
         }
       });
     </script>
