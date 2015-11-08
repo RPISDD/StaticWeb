@@ -108,6 +108,23 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             <div class='bottom-title paper-font-subhead'>Because SIS is Awful and LMS is Broken</div>
           </div>
 
+          <!-- Logout Button -->
+          <div id='logOutButton'><paper-button>Log Out</paper-button></div>
+          <!-- Logout script -->
+          <script>
+            (function(){
+              var tsLogOut = function(){
+                // Invalidate token
+                localStorage.setItem('tsToken', null);
+                // Debugging
+                console.log('Logged out');
+              };
+              // Set event listener
+              document.getElementById('logOutButton').onclick = tsLogOut;
+            })();
+          </script>
+
+
         </paper-toolbar>
 
         <!-- Main Content -->
