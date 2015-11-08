@@ -77,12 +77,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   // Session token handlers
   document.getToken = function(){
     return JSON.parse(localStorage.getItem('tsToken'));
-  }
+  };
   var validToken = function(){
-    return document.getToken()!= null;
+    return document.getToken()!== null;
   };
   document.checkToken = function(){
-    if(validToken() == false){
+    if(validToken() === false){
       window.location = '/welcome.html';
     }
   };

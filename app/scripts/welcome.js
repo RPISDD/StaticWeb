@@ -11,5 +11,5 @@
     console.log('Token: ', localStorage.getItem('tsToken'));
     // Load main website
     window.location = '/';
-  }
+  };
 })(document);
