@@ -5,6 +5,7 @@
   <script src='bower_components/webcomponentsjs/webcomponents-lite.js'></script>
   <!-- endbuild -->
   <link rel='import' href='assets.html'>
+  <script src='scripts/welcome.js'></script>
   <style shim-shadowdom>
     paper-button.colored {
       color: #4285f4;
@@ -66,17 +67,7 @@
       Polymer({
         is: 'ts-login',
         ready: function(){
-          this.$.loginForm.addEventListener('iron-form-response',function(data){
-            var token = data.detail;
-            console.log('Recvd token: ', token); //TODO: remove
-            //TODO: validate token
-            // Set token
-            localStorage.setItem('tsToken', JSON.stringify(token));
-            // Debug logging
-            console.log('Token: ', localStorage.getItem('tsToken'));
-            // Load main website
-            window.location = '/';
-          });
+          this.$.loginForm.addEventListener('iron-form-response', document.tsLogin);
         },
         switchWelcome: function() {
           landing.welcomeRoute='welcome';
@@ -109,6 +100,9 @@
     <script>
       Polymer({
         is: 'ts-signup',
+        ready: function(){
+          this.$.signupForm.addEventListener('iron-form-response', document.tsLogin);
+        },
         switchWelcome: function() {
           landing.welcomeRoute='welcome';
 	      },
