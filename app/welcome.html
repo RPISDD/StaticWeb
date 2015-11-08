@@ -63,24 +63,26 @@
       </form>
     </template>
     <script>
-      /* exported submitForm */
       Polymer({
         is: 'ts-login',
           ready: function(){
             this.$.loginForm.addEventListener('iron-form-response',function(data){
-              console.log(data.detail.parseResponse());
-              localStorage.setItem('tsToken', data.detail.parseResponse());
+              var token = data.detail;
+              console.log('Recvd token: ', token); //TODO: remove
+              //TODO: validate token
+              // Set token
+              localStorage.setItem('tsToken', JSON.stringify(token));
+              // Debug logging
+              console.log('Token: ', localStorage.getItem('tsToken'));
+              // Load main website
+              window.location = '/';
             });
           },
           switchWelcome: function() {
             landing.welcomeRoute='welcome';
           },
           submitForm: function() {
-            document.getElementById('loginForm').submit();
-            window.location = '/';
-          },
-          testing: function(data) {
-             console.log(data);
+            this.$.loginForm.submit();
           }
       });
     </script>
