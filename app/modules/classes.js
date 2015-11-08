@@ -1,6 +1,6 @@
-/* exported tsClasses */
+/* exported tsModuleClasses */
 /* globals tsModule */
-var tsClasses = function(){
+var tsModuleClasses = function(){
   var obj = tsModule();
   obj.endpointTail = 'classes';
   obj.moduleName = 'Class List';

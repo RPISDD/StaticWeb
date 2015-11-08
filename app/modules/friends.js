@@ -1,6 +1,6 @@
-/* exported tsFriends */
+/* exported tsModuleFriends */
 /* globals tsModule */
-var tsFriends = function(){
+var tsModuleFriends = function(){
   var obj = tsModule();
   obj.endpointTail = 'friends';
   obj.moduleName = 'Friends List';

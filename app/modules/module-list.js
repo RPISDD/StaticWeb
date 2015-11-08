@@ -1,4 +1,6 @@
 // List of references to module classes
 /* exported moduleList */
-/* globals tsFriends: true, tsClasses: true*/
-var moduleList = [tsFriends(),tsClasses()];
+/* globals tsModuleFriends: true, tsModuleClasses: true, 
+   tsModuleFacebook: true 
+*/
+var moduleList = [tsModuleFriends(),tsModuleClasses(),tsModuleFacebook()];

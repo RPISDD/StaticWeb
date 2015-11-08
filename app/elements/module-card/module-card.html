@@ -27,6 +27,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class='module-card'>
       <paper-card heading={{module.moduleName}}>
       <div class='module-description'>{{module.moduleDescription}}</div>
+      <div id='additionalContent'></div>
     </paper-card>
   </div>
   </template>
@@ -36,11 +37,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     Polymer({
       is: 'module-card',
-
       properties: {
         module: {
-          type: Object
+          type: Object,
+          observer: '_moduleChanged'
         } 
+      },
+
+      _moduleChanged: function(){
+        if(this.module.moduleCardElement){
+          //TODO: implement for real
+          var addlContentDiv = this.$.additionalContent;
+          var addlContent = document.createElement('img');
+          addlContent.src = 'http://replygif.net/i/363.gif';
+          Polymer.dom(addlContentDiv).appendChild(addlContent);
+        }
       },
     });
   })();

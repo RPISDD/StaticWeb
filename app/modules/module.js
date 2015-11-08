@@ -15,6 +15,7 @@ var tsModule = function(){
   obj.moduleName = 'ts-module';
   obj.moduleDescription = 'The base class for TimeShift Polymer Modules';
   obj.modulePage = null;
+  obj.moduleCardElement = null;
   obj.modulePageElement = null;
   obj.moduleIronIcon = 'extension';
 
