@@ -149,15 +149,19 @@ gulp.task('copy', function () {
   var swToolbox = gulp.src(['bower_components/sw-toolbox/*.js'])
     .pipe(gulp.dest('dist/sw-toolbox'));
 
+  var scripts = gulp.src(['app/scripts/**/*.js'])
+    .pipe(gulp.dest('dist/scripts'));
+
   var modScripts = gulp.src(['app/modules/**/*.html',
                              'app/modules/**/*.js'])
-      .pipe(gulp.dest('dist/modules'));
+    .pipe(gulp.dest('dist/modules'));
 
   var vulcanized = gulp.src(['app/elements/elements.html'])
     .pipe($.rename('elements.vulcanized.html'))
     .pipe(gulp.dest('dist/elements'));
 
-  return merge(app, bower, elements, modScripts, vulcanized, swBootstrap, swToolbox)
+  return merge(app, bower, elements, scripts, modScripts, vulcanized,
+               swBootstrap, swToolbox)
     .pipe($.size({title: 'copy'}));
 });
 
@@ -311,7 +315,7 @@ require('web-component-tester').gulp.init(gulp);
 try { require('require-dir')('tasks'); } catch (err) {}
 
 // Deploy web application to S3 bucket
-gulp.task('publish', function() {
+gulp.task('publish', ['default'], function() {
   var credentials = JSON.parse(fs.readFileSync('aws-credentials.json', 'utf8'));
   var publisher = awspublish.create(credentials);
 
