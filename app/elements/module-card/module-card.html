@@ -49,10 +49,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       _moduleChanged: function(){
         if(this.module.moduleCardElement){
-          //TODO: implement for real
           var addlContentDiv = this.$.additionalContent;
-          var addlContent = document.createElement('img');
-          addlContent.src = 'http://replygif.net/i/363.gif';
+          var addlContent = document.createElement(this.module.moduleCardElement);
           Polymer.dom(addlContentDiv).appendChild(addlContent);
         }
       },

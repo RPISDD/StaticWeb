@@ -5,7 +5,7 @@ var tsModuleFacebook = function(){
   obj.endpointTail = 'facebook';
   obj.moduleName = 'Facebook Friends';
   obj.moduleDescription = 'Connect to our Facebook App';
-  obj.moduleCardElement = 'herro';
+  obj.moduleCardElement = 'facebook-card';
 
   // AJAX Resources
   obj.ajaxResources = {
