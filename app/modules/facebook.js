@@ -2,7 +2,7 @@
 /* globals tsModule */
 var tsModuleFacebook = function(){
   var obj = tsModule();
-  obj.endpointTail = 'facebook';
+  obj.endpointTail = 'tsFacebook';
   obj.moduleName = 'Facebook Friends';
   obj.moduleDescription = 'Connect to our Facebook App';
   obj.moduleCardElement = 'facebook-card';
@@ -10,6 +10,7 @@ var tsModuleFacebook = function(){
   // AJAX Resources
   obj.ajaxResources = {
     root: obj.endpointURL(),
+    friendList: obj.endpointURL() + '/friendList'
   };
 
   return obj;

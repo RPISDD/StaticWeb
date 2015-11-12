@@ -9,14 +9,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
+<link rel='import' href='../../bower_components/facebook-login/dist/facebook-login.html'>
 
 <dom-module id='facebook-card'>
   <!-- Contains the source code for the web page -->
   <template>
-    <p>Hello Wurld</p>
-    <img src='http://replygif.net/i/363.gif'></img>
+    <div id='fb-login'>
+      <facebook-login 
+        appID='1660606690823431'
+        logout-link
+        graph-url='me/friends'
+        scope='public_profile, user_friends'
+        graph-response='{{fbFriendIds}}'
+        auto-api-call
+        id='loginButton'>
+        </facebook-login> 
+     to add your FB friends to TimeShift</div></br>
   </template>
   <script>
+  /* global $ */
+  // Polymer Script
   (function() {
     'use strict';
 
@@ -31,6 +43,47 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           type: Object,
           reflectToAttribute: true
         },
+        // Facebook social data
+        fbFriendIds: {
+          type: Object,
+          notify: true,
+          observer: '_facebookResponded'
+        },
+      },
+      // Facebook response handler
+      _facebookResponded: function(response){
+        // Skip failures, non-logins, etc...
+        if(response === undefined || response === null || response.data === undefined){
+          return;
+        }
+        // Get friend ID's out of payload
+        var friends = [];
+        for(var i = 0; i < response.data.length; i++){
+          friends.push(response.data[i].id);
+        }
+        // Hide the login 
+        document.getElementById('fb-login').hidden = true;
+        // Get own ID
+        this.$.loginButton.graphUrl = 'me';
+        var module = this.module;
+        var handleResponse = function(response){
+          var fbId = response.detail.response.id;
+          if(fbId === undefined){
+            return;
+          }
+          // Send data to module
+          $.ajax({
+            type: 'POST',
+            url: module.ajaxResources.friendList,
+            contentType: 'application/json',
+            success:  function(xhr, stat, data){console.log('Ajax Success: ', data);},
+            error:    function(xhr, stat, error){console.log('AJAX Error: ', xhr, stat, error);},
+            data: JSON.stringify({fbId: fbId, friendsList:friends})
+          });
+        }
+        this.$.loginButton.addEventListener('graph-response', function(response){
+           handleResponse(response); 
+        });
       },
     });
   })();

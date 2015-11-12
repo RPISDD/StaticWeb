@@ -2,7 +2,7 @@
 /* globals tsModule */
 var tsModuleFriends = function(){
   var obj = tsModule();
-  obj.endpointTail = 'friends';
+  obj.endpointTail = 'tsFriends';
   obj.moduleName = 'Friends List';
   obj.moduleDescription = 'A list of friends';
   obj.modulePage = 'friends';

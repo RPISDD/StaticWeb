@@ -18,28 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel='import' href='assets.html'>
   <!-- Configure your routes here -->
   <link rel='import' href='elements/routing-app.html'>
-  <!-- Facebook integration -->
-  <script>
-    /* global FB */
-    window.fbAsyncInit = function(){
-      FB.init({
-        appId: '1660606690823431',
-        xfbml: true,
-        version: 'v2.5'
-      });
-    };
-    (function(doc, script, id){
-      var js, fjs = doc.getElementsByTagName(script)[0];
-      if(doc.getElementById(id)){
-        return;
-      }
-      js = doc.createElement(script);
-      js.id = id;
-      js.src = '//connect.facebook.net/en_US/sdk.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    })(document, 'script', 'facebook-jssdk');
-  </script>
-</head>
+  </head>
 <body unresolved class='fullbleed layout vertical'>
   <span id='browser-sync-binding'></span>
   <template is='dom-bind' id='app'>

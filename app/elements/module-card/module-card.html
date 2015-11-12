@@ -51,6 +51,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if(this.module.moduleCardElement){
           var addlContentDiv = this.$.additionalContent;
           var addlContent = document.createElement(this.module.moduleCardElement);
+          addlContent.module = this.module;
           Polymer.dom(addlContentDiv).appendChild(addlContent);
         }
       },
