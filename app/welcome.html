@@ -45,8 +45,8 @@
         switchLogin: function() {
           landing.welcomeRoute='login';
         },
-	      switchSignup: function() {
-	        landing.welcomeRoute='signup';
+        switchSignup: function() {
+          landing.welcomeRoute='signup';
         }
       });
     </script>
@@ -54,8 +54,8 @@
   <dom-module id='ts-login'>
     <template>
       <form is='iron-form' id='loginForm' method='post' 
-	      action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login'
-	      on-response='testing'>
+        action='api/tsLogin'
+        on-response='testing'>
 
         <paper-input name='email' label='Email' required></paper-input>
         <paper-input type ='password' name='password' label='Password' required></paper-input>
@@ -81,15 +81,15 @@
   <dom-module id='ts-signup'>
      <template>
         <form is='iron-form' id='signupForm' method='post' 
-          action='https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/login'>
+          action='api/tsSignup'>
           
           <paper-input name='first' label='First' required></paper-input>
-	        <paper-input name='last' label='Last' required></paper-input>
+          <paper-input name='last' label='Last' required></paper-input>
           <paper-input name='rin' label='RIN' required></paper-input>
           <paper-input name='email' label='Email' required></paper-input>
           <paper-input type ='password' name='password' label='Password' required>
           </paper-input>
-	        <paper-input type ='password' name='confirm' label='Confim Password' required>
+          <paper-input type ='password' name='confirm' label='Confim Password' required>
           </paper-input>
           <paper-input name='crn' label='Class CRNs, seperated by a space' required >
           </paper-input>
@@ -105,7 +105,7 @@
         },
         switchWelcome: function() {
           landing.welcomeRoute='welcome';
-	      },
+        },
         submitForm: function() {
           document.getElementById('signupForm').submit();
         }
