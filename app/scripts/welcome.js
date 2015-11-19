@@ -2,7 +2,7 @@
   // Create a login event handler
   document.tsLogin = function(loginData){
     /* jshint camelcase: false */
-    var token = loginData.detail.parseResponse().reply_object;
+    var token = loginData.detail.parseResponse().replyObject;
     // Set token
     localStorage.setItem('tsToken', JSON.stringify(token));
     // Debug logging
