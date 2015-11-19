@@ -75,11 +75,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   };
 
   // Session token handlers
-  document.getToken = function(){
-    return JSON.parse(localStorage.getItem('tsToken'));
-  };
   var validToken = function(){
-    return document.getToken()!== null;
+    if(localStorage.getItem('tsRIN') === null){
+      return false;
+    }
+    return localStorage.getItem('tsToken') !== null;
   };
   document.checkToken = function(){
     if(validToken() === false){
@@ -87,4 +87,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
   };
   document.checkToken();
+  document.getToken = function(){
+    if(validToken === false){
+      document.checkToken();
+      return null;
+    }
+    return JSON.parse(localStorage.getItem('tsToken'));
+  };
+
+  // Helper to get RIN
+  document.getRIN = function(){
+    var rinStr = localStorage.getItem('tsRIN');
+    console.log('Stored RIN', rinStr);
+    var RIN = parseInt(JSON.parse(localStorage.getItem('tsRIN')));
+    console.log('Got RIN', RIN);
+    return RIN;
+  };
 })(document);

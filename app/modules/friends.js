@@ -10,8 +10,8 @@ var tsModuleFriends = function(){
 
   // AJAX Resources
   obj.ajaxResources = {
-    root: obj.endpointURL()
-    //TODO: dedicated friends list resource
+    root: obj.endpointURL(),
+    friendsList: obj.endpointURL() + '/friendsList'
   };
 
   return obj;

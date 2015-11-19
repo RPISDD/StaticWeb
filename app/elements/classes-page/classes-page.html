@@ -15,8 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <!-- This is a Demo of using Iron Ajax -->
     <iron-ajax
-      auto
-      id='ajaxDemo'
+      id='classLoader'
       url='[[module.ajaxResources.root]]'
       last-response='{{ajaxResponse}}'
       handle-as='json'>
@@ -30,8 +29,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      padding: 16px;
       }
     </style>
-    <template is="dom-repeat" items = "[[ajaxResponse]]">
-      <paper-material class='classcard' elevation="2">  
+    <template is='dom-repeat' items = '[[ajaxResponse.replyObject]]'>
+      <paper-material class='classcard' elevation='2'>  
 	      <div><span>{{item}}</span></div>
       </paper-material>
     </template>
@@ -41,6 +40,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     'use strict';
     Polymer({
       is: 'classes-page',
+      attached: function() {
+        // Debugging
+        this.$.classLoader.addEventListener('response', function(data) {
+            console.log('Class loader got data:', data);
+        });
+        // Load class list
+        this.$.classLoader.params = {
+          RIN: document.getRIN()
+        };
+        this.$.classLoader.generateRequest();
+      },
       // Internal variables for this DOM element
       properties: {
         // The javascript object for this module, 
@@ -54,7 +64,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // Data type
           type: String,
           // Default value
-          value: [],
+          value: { replyObject:[] },
           // Update page when value changes
           notify: true
         },

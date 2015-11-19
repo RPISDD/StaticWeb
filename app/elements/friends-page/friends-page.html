@@ -15,8 +15,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <template>
     <!-- This is a Demo of using Iron Ajax -->
     <iron-ajax
-      auto
-      id='ajaxDemo'
+      id='friendsListLoader'
       url='[[module.ajaxResources.root]]'
       last-response='{{ajaxResponse}}'
       handle-as='json'>
@@ -30,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      padding: 16px;
       }
     </style>
-    <template is="dom-repeat" items = "[[ajaxResponse]]">
+    <template is="dom-repeat" items = "[[ajaxResponse.replyObject]]">
       <paper-material class='friendcard' elevation="2">  
 	      <div><span>{{item}}</span></div>
       </paper-material>
@@ -41,6 +40,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     'use strict';
     Polymer({
       is: 'friends-page',
+      attached: function() {
+        // Set query string
+        this.$.friendsListLoader.params = {
+          RIN: document.getRIN()
+        };
+        console.log('Friends query string:', this.$.friendsListLoader.queryString);
+        // Set debug callback
+        this.$.friendsListLoader.addEventListener('request', function(payload){
+          console.log('Sending payload:', payload);
+        });
+        // Fire AJAX request
+        this.$.friendsListLoader.generateRequest();
+        console.log('Requested friends list');
+      },
       // Internal variables for this DOM element
       properties: {
         // The javascript object for this module, 
@@ -54,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // Data type
           type: String,
           // Default value
-          value: [],
+          value: {replyObject:[]},
           // Update page when value changes
           notify: true
         },

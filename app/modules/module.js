@@ -4,8 +4,7 @@ var tsModule = function(){
   var obj = {};
 
   //API Endpoint Configuration
-  //obj.endpointHead = 'https://zyxk3wqzue.execute-api.us-east-1.amazonaws.com/prod/';
-  obj.endpointHead = 'http://localhost:8080/';
+  obj.endpointHead = '/api/';
   obj.endpointTail = 'core';
   obj.endpointURL = function(){
     var url = obj.endpointHead + obj.endpointTail;

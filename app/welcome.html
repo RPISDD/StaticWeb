@@ -57,7 +57,7 @@
         action='api/tsLogin'
         on-response='testing'>
 
-        <paper-input name='email' label='Email' required></paper-input>
+        <paper-input name='RIN' label='RIN' required></paper-input>
         <paper-input type ='password' name='password' label='Password' required></paper-input>
         <div><paper-button raised on-click='submitForm'>Log in</paper-button>
           <paper-button raised on-click='switchWelcome'>Back</paper-button></div>
@@ -68,6 +68,7 @@
         is: 'ts-login',
         ready: function(){
           this.$.loginForm.addEventListener('iron-form-response', document.tsLogin);
+          this.$.loginForm.addEventListener('iron-form-submit', document.tsPreLogin);
         },
         switchWelcome: function() {
           landing.welcomeRoute='welcome';
@@ -102,6 +103,7 @@
         is: 'ts-signup',
         ready: function(){
           this.$.signupForm.addEventListener('iron-form-response', document.tsLogin);
+          this.$.signupForm.addEventListener('iron-form-submit', document.tsPreLogin);
         },
         switchWelcome: function() {
           landing.welcomeRoute='welcome';
