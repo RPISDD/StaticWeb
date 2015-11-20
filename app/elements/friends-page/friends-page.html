@@ -29,6 +29,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      padding: 16px;
       }
     </style>
+      <form is='iron-form' id='addFriendForm' method='post' 
+        action='/api/tsFriends'>
+
+        <paper-input name='RIN' label='RIN' required></paper-input>
+        <paper-button raised on-click='submitForm'>Add friend</paper-button>
+      </form>
     <template is="dom-repeat" items = "[[ajaxResponse.replyObject]]">
       <paper-material class='friendcard' elevation="2">  
 	      <div><span>{{item}}</span></div>
@@ -72,6 +78,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true
         },
       },
+      ready: function(){
+        this.$.addFriendForm.addEventListener('iron-form-response', document.tsAddFriend);
+        this.$.addFriendForm.addEventListener('iron-form-submit', document.tsPreAddFriend);
+      },
+      submitForm: function() {
+        this.$.addFriendForm.submit();
+      }
     });
   })();
   </script>
