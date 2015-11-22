@@ -7,7 +7,6 @@
       id='classLoader'
       url='[[targetURL]]'
       headers='{{_makeHeaders()}}'
-      params='[[_ajaxParams]]'
       handle-as='json'
       last-response='{{friendClasses}}'>
     </iron-ajax>
@@ -29,20 +28,26 @@
         return document.getRIN();
       },
       _getAjaxParams: function() {
-        return { friendRIN: this.friendRIN };
+        var params = { 
+          friendRIN: this.friendRIN,
+          RIN: document.getRIN()
+        };
+        console.log('Sending AJAX params', params);
+        return params;
       },
       go: function() {
-        console.log('Loading friend classes');
-        this.$.classLoader.generateRequest();
+        var loader = this.$.classLoader;
+        loader.params = {};
+        loader.params.friendRIN = this.friendRIN;
+        loader.params.RIN = document.getRIN();
+        console.log('Loading friend classes with',loader);
+        loader.generateRequest();
+        console.log('Fired request');
       },
       properties: {
         _selfRIN: {
           type: String,
           computed: '_getSelfRIN()'
-        },
-        _ajaxParams: {
-          type: Object,
-          computed: '_getAjaxParams()'
         },
         friendRIN: {
           type: String,
