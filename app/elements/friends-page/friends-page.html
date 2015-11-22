@@ -33,8 +33,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <form is='iron-form' id='addFriendForm' method='post' 
       headers='{{makeHeaders()}}' action='/api/tsFriends'>
 
+        <paper-input name='RIN' label='Own RIN' value='{{getRIN()}}' readonly>
+          </paper-input>
         <paper-input name='friendRIN' label='Friend RIN' required></paper-input>
-        <paper-button raised on-click='addFriendSubmit'>Add friend</paper-button>
+        <paper-button raised on-click='addFriendSubmit'>Add friend
+          </paper-button>
       </form>
     <template is="dom-repeat" items = "[[ajaxResponse.replyObject]]">
       <paper-material class='friendcard' elevation="2">  
@@ -68,6 +71,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       makeHeaders : function() {
         return document.getTokenHeader();
+      },
+      getRIN: function() {
+        return document.getRIN();
       },
       // Internal variables for this DOM element
       properties: {
