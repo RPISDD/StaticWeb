@@ -13,12 +13,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id='classes-page'>
   <!-- Contains the source code for the web page -->
   <template>
-    <!-- This is a Demo of using Iron Ajax -->
+    <!-- Gets list of classes -->
     <iron-ajax
       id='classLoader'
-      url='[[module.ajaxResources.root]]'
-      last-response='{{ajaxResponse}}'
-      headers='{{makeHeaders()}}'
+      url='[[module.ajaxResources.classList]]'
+      last-response='{{classListReply}}'
+      headers='{{_makeHeaders()}}'
       handle-as='json'>
     </iron-ajax>
     <style>
@@ -32,16 +32,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </style>
     <div style='margin:10px'>
     <form is='iron-form' id='addClassForm' method='post' 
-      headers='{{makeHeaders()}}' action='/api/tsClasses'>
+      headers='{{_makeHeaders()}}' action='/api/tsClasses'>
         <paper-input name='classCRN' label='Class CRN' required></paper-input>
         <paper-button raised on-click='addClassSubmit'>Add class
           </paper-button>
       </form>
     </div>
     <div style='margin:10px'>
-    <template is='dom-repeat' items = '[[ajaxResponse.replyObject]]'>
+    <template is='dom-repeat' items = '[[classListReply.replyObject]]'>
       <paper-material class='classcard' elevation='2'>  
-	      <div><span>{{item}}</span></div>
+	      <div><span>{{item.Name}}</span></div>
       </paper-material>
     </template>
     </div>
@@ -62,7 +62,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
         this.$.classLoader.generateRequest();
       },
-      makeHeaders : function() {
+      _makeHeaders : function() {
         return document.getTokenHeader();
       },
       // Internal variables for this DOM element
@@ -74,7 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true
         },
         // This value is set by the iron-ajax element
-        ajaxResponse: {
+        classListReply: {
           // Data type
           type: String,
           // Default value

@@ -10,7 +10,9 @@ var tsModuleClasses = function(){
 
   // AJAX Resources
   obj.ajaxResources = {
-    root: obj.endpointURL()
+    root: obj.endpointURL(),
+    classList: obj.endpointURL() + '/classList',
+    classDetails: obj.endpointURL() + '/classDetails'
   };
 
   return obj;
