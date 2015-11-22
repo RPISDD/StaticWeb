@@ -9,6 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
+<link rel='import' href='class-details.html'>
 
 <dom-module id='classes-page'>
   <!-- Contains the source code for the web page -->
@@ -40,8 +41,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
     <div style='margin:10px'>
     <template is='dom-repeat' items = '[[classListReply.replyObject]]'>
-      <paper-material class='classcard' elevation='2'>  
+      <paper-material class='classcard' elevation='2'
+        onclick='[[showClassDetails(item.CRN, module.ajaxResources.classDetails)]]'>  
 	      <div><span>{{item.Name}}</span></div>
+        <div class='classDetails' id='[[_generateClassId(item.CRN)]]' hidden>
+          <p>Class Times: </p>
+        </div>
       </paper-material>
     </template>
     </div>
@@ -64,6 +69,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       _makeHeaders : function() {
         return document.getTokenHeader();
+      },
+      _generateClassId: function(classCRN) {
+        return 'classInfoDiv' + classCRN;
+      },
+      showClassDetails: function(classCRN, targetURL) {
+        return function() {
+          var classDetails = document.createElement('class-details');
+          classDetails.classCRN = classCRN;
+          classDetails.targetURL = targetURL;
+          var targetDiv = document.getElementById('classInfoDiv' + classCRN);
+          // Add details to class card
+          targetDiv.appendChild(classDetails);
+          targetDiv.parentElement.onclick = function() {
+            targetDiv.hidden = !targetDiv.hidden;
+          };
+          // Get data from server
+          classDetails.go();
+          // Unhide
+          targetDiv.hidden = false;
+        };
       },
       // Internal variables for this DOM element
       properties: {

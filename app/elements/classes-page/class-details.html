@@ -12,14 +12,7 @@
     </iron-ajax>
     <ul>
     <template is='dom-repeat' items='[[classDetails.replyObject]]'>
-      <li>
-        <span>[[item]]</span>: 
-        <ul>
-          <template is='dom-repeat' items='[[item]]'>
-            <li>[[item]]</li>
-          </template>
-        </ul>
-      </li>
+      <span>[[item]]</span>: 
     </template>
     <ul>
   </template>
@@ -66,7 +59,7 @@
         classDetails: {
           type: Object,
           notify: true,
-          value: {replyObject:['loading...']}
+          value: {replyObject:[{CRN: 0, Name: 'loading...'}, {CRN: 1, Name: 'loading...'}]}
         }
       }
     });
