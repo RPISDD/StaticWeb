@@ -31,6 +31,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      padding: 16px;
       }
     </style>
+    <div style='margin:10px'>
     <form is='iron-form' id='addFriendForm' method='post' 
       headers='{{makeHeaders()}}' action='/api/tsFriends'>
 
@@ -40,6 +41,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-button raised on-click='addFriendSubmit'>Add friend
           </paper-button>
       </form>
+    </div>
+    <div style='margin:10px'>
     <template is="dom-repeat" items="[[friendsList.replyObject]]">
       <paper-material class='friendcard' elevation="2"
         onclick='[[showFriendClasses(item.RIN, module.ajaxResources.friendClasses)]]'>  
@@ -50,6 +53,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         </div>
       </paper-material>
     </template>
+    </div>
   </template>
   <script>
   (function() {
