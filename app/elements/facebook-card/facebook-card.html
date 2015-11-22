@@ -74,6 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // Send data to module
           $.ajax({
             type: 'POST',
+            headers: document.getTokenHeader(),
             url: module.ajaxResources.friendList + '?RIN=' + document.getRIN(),
             contentType: 'application/json',
             success:  function(xhr, stat, data){console.log('Ajax Success: ', data);},
