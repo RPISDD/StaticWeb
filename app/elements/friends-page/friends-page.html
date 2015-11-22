@@ -33,7 +33,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         action='/api/tsFriends'>
 
         <paper-input name='RIN' label='RIN' required></paper-input>
-        <paper-button raised on-click='submitForm'>Add friend</paper-button>
+        <paper-button raised on-click='addFriendSubmit'>Add friend</paper-button>
       </form>
     <template is="dom-repeat" items = "[[ajaxResponse.replyObject]]">
       <paper-material class='friendcard' elevation="2">  
@@ -59,6 +59,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Fire AJAX request
         this.$.friendsListLoader.generateRequest();
         console.log('Requested friends list');
+        // Set add friend callback
+        this.$.addFriendForm.addEventListener('reply', function() {
+          // If we added a new friend, then we need to reload our list
+          this.$.friendsListLoader.generateRequest();
+        });
       },
       // Internal variables for this DOM element
       properties: {
@@ -82,7 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.addFriendForm.addEventListener('iron-form-response', document.tsAddFriend);
         this.$.addFriendForm.addEventListener('iron-form-submit', document.tsPreAddFriend);
       },
-      submitForm: function() {
+      addFriendSubmit: function() {
         this.$.addFriendForm.submit();
       }
     });
