@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       id='classLoader'
       url='[[module.ajaxResources.root]]'
       last-response='{{ajaxResponse}}'
+      headers='{{makeHeaders()}}'
       handle-as='json'>
     </iron-ajax>
     <style>
@@ -50,6 +51,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           RIN: document.getRIN()
         };
         this.$.classLoader.generateRequest();
+      },
+      makeHeaders : function() {
+        return document.getTokenHeader();
       },
       // Internal variables for this DOM element
       properties: {
