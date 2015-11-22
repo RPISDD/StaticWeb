@@ -79,16 +79,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       genClassId: function(friendRIN) {
         return 'classDiv' + friendRIN;
       },
-      showFriendClasses : function(friendRIN, urlPrefix) {
+      showFriendClasses : function(friendRIN, targetURL) {
         var genClassList = function(friendRIN, targetURL) {
           var classList = document.createElement('friend-classes');
           classList.friendRIN = friendRIN;
           classList.targetURL = targetURL;
+          classList.go();
           return classList;
         };
         return function() {
           var targetDiv = document.getElementById('classDiv' + friendRIN);
-          var targetURL = urlPrefix + '/' + friendRIN;
           targetDiv.appendChild(genClassList(friendRIN, targetURL));
           targetDiv.hidden = false;
           targetDiv.parentElement.onclick = function() {

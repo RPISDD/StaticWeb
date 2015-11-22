@@ -4,9 +4,10 @@
 <dom-module id='friend-classes'>
   <template>
     <iron-ajax
-      id='[[friendRIN]]'
+      id='classLoader'
       url='[[targetURL]]'
       headers='{{_makeHeaders()}}'
+      params='[[_ajaxParams]]'
       handle-as='json'
       last-response='{{friendClasses}}'>
     </iron-ajax>
@@ -27,10 +28,21 @@
       _getSelfRIN: function() {
         return document.getRIN();
       },
+      _getAjaxParams: function() {
+        return { friendRIN: this.friendRIN };
+      },
+      go: function() {
+        console.log('Loading friend classes');
+        this.$.classLoader.generateRequest();
+      },
       properties: {
-        selfRIN: {
+        _selfRIN: {
           type: String,
           computed: '_getSelfRIN()'
+        },
+        _ajaxParams: {
+          type: Object,
+          computed: '_getAjaxParams()'
         },
         friendRIN: {
           type: String,
