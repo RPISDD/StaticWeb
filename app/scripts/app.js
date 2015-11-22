@@ -95,6 +95,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     return JSON.parse(localStorage.getItem('tsToken'));
   };
+  document.getTokenHeader = function() {
+    var headers = {};
+    headers.Authorization = 'Bearer ' + localStorage.getItem('tsToken');
+    return headers;
+  };
 
   // Helper to get RIN
   document.getRIN = function(){

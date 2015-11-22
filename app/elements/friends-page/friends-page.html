@@ -18,6 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       id='friendsListLoader'
       url='[[module.ajaxResources.root]]'
       last-response='{{ajaxResponse}}'
+      headers='{{makeHeaders()}}'
       handle-as='json'>
     </iron-ajax>
     <style>
@@ -29,10 +30,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      padding: 16px;
       }
     </style>
-      <form is='iron-form' id='addFriendForm' method='post' 
-        action='/api/tsFriends'>
+    <form is='iron-form' id='addFriendForm' method='post' 
+      headers='{{makeHeaders()}}' action='/api/tsFriends'>
 
-        <paper-input name='RIN' label='RIN' required></paper-input>
+        <paper-input name='friendRIN' label='Friend RIN' required></paper-input>
         <paper-button raised on-click='addFriendSubmit'>Add friend</paper-button>
       </form>
     <template is="dom-repeat" items = "[[ajaxResponse.replyObject]]">
@@ -64,6 +65,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           // If we added a new friend, then we need to reload our list
           this.$.friendsListLoader.generateRequest();
         });
+      },
+      makeHeaders : function() {
+        return document.getTokenHeader();
       },
       // Internal variables for this DOM element
       properties: {
