@@ -1,0 +1,75 @@
+<!-- Helper Element for friends-page Element -->
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<dom-module id='class-details'>
+  <template>
+    <iron-ajax
+      id='classLoader'
+      url='[[targetURL]]'
+      headers='{{_makeHeaders()}}'
+      handle-as='json'
+      last-response='{{classDetails}}'>
+    </iron-ajax>
+    <ul>
+    <template is='dom-repeat' items='[[classDetails.replyObject]]'>
+      <li>
+        <span>[[item]]</span>: 
+        <ul>
+          <template is='dom-repeat' items='[[item]]'>
+            <li>[[item]]</li>
+          </template>
+        </ul>
+      </li>
+    </template>
+    <ul>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'class-details',
+      _makeHeaders: function() {
+        return document.getTokenHeader();
+      },
+      _getSelfRIN: function() {
+        return document.getRIN();
+      },
+      _getAjaxParams: function() {
+        var params = { 
+          classCRN: this.classCRN,
+          RIN: document.getRIN()
+        };
+        console.log('Sending AJAX params', params);
+        return params;
+      },
+      go: function() {
+        var loader = this.$.classLoader;
+        loader.params = {};
+        loader.params.classCRN = this.classCRN;
+        loader.params.RIN = document.getRIN();
+        loader.generateRequest();
+        console.log('Fired request');
+      },
+      properties: {
+        _selfRIN: {
+          type: String,
+          computed: '_getSelfRIN()'
+        },
+        classCRN: {
+          type: String,
+          notify: true
+        },
+        targetURL: {
+          type: String,
+          notify: true
+        },
+        classDetails: {
+          type: Object,
+          notify: true,
+          value: {replyObject:['loading...']}
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>
