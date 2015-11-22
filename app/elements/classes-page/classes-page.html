@@ -30,11 +30,21 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 	      padding: 16px;
       }
     </style>
+    <div style='margin:10px'>
+    <form is='iron-form' id='addClassForm' method='post' 
+      headers='{{makeHeaders()}}' action='/api/tsClasses'>
+        <paper-input name='classCRN' label='Class CRN' required></paper-input>
+        <paper-button raised on-click='addClassSubmit'>Add class
+          </paper-button>
+      </form>
+    </div>
+    <div style='margin:10px'>
     <template is='dom-repeat' items = '[[ajaxResponse.replyObject]]'>
       <paper-material class='classcard' elevation='2'>  
 	      <div><span>{{item}}</span></div>
       </paper-material>
     </template>
+    </div>
   </template>
   <script>
   (function() {
@@ -73,6 +83,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true
         },
       },
+      addClassSubmit: function() {
+        // If we added a new friend, then we need to reload our list
+        setTimeout(function(){
+          console.log('Updated class list');
+          this.$.classListLoader.generateRequest();
+        }, 1000);
+        this.$.addClassForm.submit();
+      }
     });
   })();
   </script>
