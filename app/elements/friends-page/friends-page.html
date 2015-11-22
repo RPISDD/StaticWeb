@@ -9,15 +9,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
+<link rel='import' href='friend-classes.html'>
 
 <dom-module id='friends-page'>
-  <!-- Contains the source code for the web page -->
+  <!-- Contains the source code for the friends page -->
   <template>
-    <!-- This is a Demo of using Iron Ajax -->
+    <!-- Loads Friends List -->
     <iron-ajax
       id='friendsListLoader'
-      url='[[module.ajaxResources.root]]'
-      last-response='{{ajaxResponse}}'
+      url='[[module.ajaxResources.friendsList]]'
+      last-response='{{friendsList}}'
       headers='{{makeHeaders()}}'
       handle-as='json'>
     </iron-ajax>
@@ -39,9 +40,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <paper-button raised on-click='addFriendSubmit'>Add friend
           </paper-button>
       </form>
-    <template is="dom-repeat" items = "[[ajaxResponse.replyObject]]">
-      <paper-material class='friendcard' elevation="2">  
-	      <div><span>{{item}}</span></div>
+    <template is="dom-repeat" items="[[friendsList.replyObject]]">
+      <paper-material class='friendcard' elevation="2"
+        onclick='[[showFriendClasses(item.RIN, module.ajaxResources.friendClasses)]]'>  
+
+	      <div><h4>{{item.name}}</h4></div>
+        <div class='friendClasses' id='[[genClassId(item.RIN)]]' hidden>
+          <p>Classes: </p>
+        </div>
       </paper-material>
     </template>
   </template>
@@ -63,17 +69,32 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // Fire AJAX request
         this.$.friendsListLoader.generateRequest();
         console.log('Requested friends list');
-        // Set add friend callback
-        this.$.addFriendForm.addEventListener('reply', function() {
-          // If we added a new friend, then we need to reload our list
-          this.$.friendsListLoader.generateRequest();
-        });
       },
       makeHeaders : function() {
         return document.getTokenHeader();
       },
       getRIN: function() {
         return document.getRIN();
+      },
+      genClassId: function(friendRIN) {
+        return 'classDiv' + friendRIN;
+      },
+      showFriendClasses : function(friendRIN, urlPrefix) {
+        var genClassList = function(friendRIN, targetURL) {
+          var classList = document.createElement('friend-classes');
+          classList.friendRIN = friendRIN;
+          classList.targetURL = targetURL;
+          return classList;
+        };
+        return function() {
+          var targetDiv = document.getElementById('classDiv' + friendRIN);
+          var targetURL = urlPrefix + '/' + friendRIN;
+          targetDiv.appendChild(genClassList(friendRIN, targetURL));
+          targetDiv.hidden = false;
+          targetDiv.parentElement.onclick = function() {
+            targetDiv.hidden = !targetDiv.hidden;
+          };
+        };
       },
       // Internal variables for this DOM element
       properties: {
@@ -84,20 +105,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           reflectToAttribute: true
         },
         // This value is set by the iron-ajax element
-        ajaxResponse: {
+        friendsList: {
           // Data type
           type: String,
           // Default value
           value: {replyObject:[]},
           // Update page when value changes
           notify: true
-        },
+        }
       },
       ready: function(){
         this.$.addFriendForm.addEventListener('iron-form-response', document.tsAddFriend);
         this.$.addFriendForm.addEventListener('iron-form-submit', document.tsPreAddFriend);
       },
       addFriendSubmit: function() {
+        // If we added a new friend, then we need to reload our list
+        setTimeout(function(){
+          console.log('Updated friends list');
+          this.$.friendsListLoader.generateRequest();
+        }, 1000);
         this.$.addFriendForm.submit();
       }
     });

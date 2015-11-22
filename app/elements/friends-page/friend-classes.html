@@ -1,0 +1,52 @@
+<!-- Helper Element for friends-page Element -->
+<link rel='import' href='../../bower_components/polymer/polymer.html'>
+
+<dom-module id='friend-classes'>
+  <template>
+    <iron-ajax
+      id='[[friendRIN]]'
+      url='[[targetURL]]'
+      headers='{{_makeHeaders()}}'
+      handle-as='json'
+      last-response='{{friendClasses}}'>
+    </iron-ajax>
+    <ul>
+    <template is='dom-repeat' items='[[friendClasses.replyObject]]'>
+      <li>[[item]]</li>
+    </template>
+    <ul>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'friend-classes',
+      _makeHeaders: function() {
+        return document.getTokenHeader();
+      },
+      _getSelfRIN: function() {
+        return document.getRIN();
+      },
+      properties: {
+        selfRIN: {
+          type: String,
+          computed: '_getSelfRIN()'
+        },
+        friendRIN: {
+          type: String,
+          notify: true
+        },
+        targetURL: {
+          type: String,
+          notify: true
+        },
+        friendClasses: {
+          type: Object,
+          notify: true,
+          value: {replyObject:['loading...']}
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

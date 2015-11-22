@@ -11,7 +11,8 @@ var tsModuleFriends = function(){
   // AJAX Resources
   obj.ajaxResources = {
     root: obj.endpointURL(),
-    friendsList: obj.endpointURL() + '/friendsList'
+    friendsList: obj.endpointURL() + '/friendsList',
+    friendClasses: obj.endpointURL() + '/friendClasses'
   };
 
   return obj;
