@@ -12,7 +12,14 @@
     </iron-ajax>
     <ul>
     <template is='dom-repeat' items='[[friendClasses.replyObject]]'>
-      <li>[[item]]</li>
+      <li>
+        <span>[[item.className]]</span>: 
+        <ul>
+          <template is='dom-repeat' items='[[item.classTime]]'>
+            <li>[[item]]</li>
+          </template>
+        </ul>
+      </li>
     </template>
     <ul>
   </template>
@@ -60,7 +67,7 @@
         friendClasses: {
           type: Object,
           notify: true,
-          value: {replyObject:['loading...']}
+          value: {replyObject:[{className:'loading...',classTime:''}]}
         }
       }
     });
