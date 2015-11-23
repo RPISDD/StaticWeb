@@ -85,7 +85,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     console.log('Checking token');
     if(validToken() === false){
       window.location = '/welcome.html';
+      return;
     }
+    console.log('Token is valid');
   };
   document.checkToken();
   document.getToken = function(){
