@@ -1,2 +1,2 @@
 #!/bin/bash
-npm install -g gulp bower && npm install && bower install
+sudo npm install -g gulp bower && npm install && bower install
