@@ -112,7 +112,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // If we added a new friend, then we need to reload our list
         setTimeout(function(){
           console.log('Updated class list');
-          this.$.classListLoader.generateRequest();
+          this.$.classLoader.generateRequest();
         }, 1000);
         this.$.addClassForm.submit();
       }
