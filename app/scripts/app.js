@@ -76,7 +76,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   // Session token handlers
   var validToken = function(){
-    if(localStorage.getItem('tsRIN') === 'null'){
+    if(localStorage.getItem('tsRIN') === 'null' ||
+        localStorage.getItem('tsRIN') === null){
       return false;
     }
     return (localStorage.getItem('tsToken') !== 'null') && 
