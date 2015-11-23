@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
 
+<!-- Iteratively generates module-card elements for each module. These 
+     generated elements are displayed on the TimeShift dashboard -->
 <dom-module id="module-card-generator">
   <template>
     <style>
@@ -30,6 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         /* global moduleList */
         for(var index in moduleList){
           var module = moduleList[index];
+          // Create new card for each module
           var card = document.createElement('module-card');
           module.initCard(module, card);
           this.$.cardHolder.appendChild(card);

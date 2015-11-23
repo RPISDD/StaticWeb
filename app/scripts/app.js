@@ -74,7 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     document.getElementById('mainContainer').scrollTop = 0;
   };
 
-  // Session token handlers
+  // Check if user has a valid authentication token
   var validToken = function(){
     if(localStorage.getItem('tsRIN') === 'null' ||
         localStorage.getItem('tsRIN') === null){
@@ -83,6 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     return (localStorage.getItem('tsToken') !== 'null') && 
       (localStorage.getItem('tsToken') !== null);
   };
+  // Check token and automatically log out if token is invalid
   document.checkToken = function(){
     console.log('Checking token');
     if(validToken() === false){
@@ -91,7 +92,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     console.log('Token is valid');
   };
+  // Check token on page load
   document.checkToken();
+  // Helper function to get auth token
   document.getToken = function(){
     if(validToken === false){
       document.checkToken();
@@ -99,6 +102,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
     return JSON.parse(localStorage.getItem('tsToken'));
   };
+  // Generate an HTTP header with the token for REST reqeusts
   document.getTokenHeader = function() {
     var headers = {};
     headers.Authorization = 'Bearer ' + localStorage.getItem('tsToken');

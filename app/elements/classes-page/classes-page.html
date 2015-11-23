@@ -32,6 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <div style='margin:10px'>
+    <!-- Form to add a class -->
     <form is='iron-form' id='addClassForm' method='post' 
       headers='{{_makeHeaders()}}' action='/api/tsClasses'>
         <paper-input name='classCRN' label='Class CRN' required></paper-input>
@@ -40,10 +41,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </form>
     </div>
     <div style='margin:10px'>
+    <!-- Create a 'Paper Card' for every class -->
     <template is='dom-repeat' items = '[[classListReply.replyObject]]'>
       <paper-material class='classcard' elevation='2'
         onclick='[[showClassDetails(item.CRN, module.ajaxResources.classDetails)]]'>  
+        <!-- Class name -->
 	      <div><span>{{item.Name}}</span></div>
+        <!-- Target for class details object -->
         <div class='classDetails' id='[[_generateClassId(item.CRN)]]' hidden>
           <p>Class Times: </p>
         </div>
@@ -67,6 +71,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         };
         this.$.classLoader.generateRequest();
       },
+      // Make HTTP request headers
       _makeHeaders : function() {
         return document.getTokenHeader();
       },
@@ -75,12 +80,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
       showClassDetails: function(classCRN, targetURL) {
         return function() {
+          // Create new web component for showing class details
           var classDetails = document.createElement('class-details');
           classDetails.classCRN = classCRN;
           classDetails.targetURL = targetURL;
           var targetDiv = document.getElementById('classInfoDiv' + classCRN);
           // Add details to class card
           targetDiv.appendChild(classDetails);
+          // Change click handler to show/hide new details object
           targetDiv.parentElement.onclick = function() {
             targetDiv.hidden = !targetDiv.hidden;
           };
@@ -108,6 +115,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           notify: true
         },
       },
+      // Submit form
       addClassSubmit: function() {
         var classLoader = this.$.classLoader;
         // If we added a new friend, then we need to reload our list

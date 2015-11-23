@@ -3,14 +3,12 @@
 
 <dom-module id='class-details'>
   <template>
-    <iron-ajax
-      id='classLoader'
-      url='[[targetURL]]'
-      headers='{{_makeHeaders()}}'
-      handle-as='json'
-      last-response='{{classDetails}}'>
+    <!-- Special Web Component for making HTTP requests to REST server -->
+    <iron-ajax id='classLoader' url='[[targetURL]]' headers='{{_makeHeaders()}}'
+      handle-as='json' last-response='{{classDetails}}'>
     </iron-ajax>
     <ul>
+    <!-- Generate bulleted list of class times -->
     <template is='dom-repeat' items='[[classDetails.replyObject]]'>
       <span>[[item]]</span> <br>
     </template>
@@ -21,12 +19,15 @@
     'use strict';
     Polymer({
       is: 'class-details',
+      // Generate HTTP header
       _makeHeaders: function() {
         return document.getTokenHeader();
       },
+      // Get user's RIN
       _getSelfRIN: function() {
         return document.getRIN();
       },
+      // Generate HTTP Query String params
       _getAjaxParams: function() {
         var params = { 
           classCRN: this.classCRN,
@@ -35,6 +36,7 @@
         console.log('Sending AJAX params', params);
         return params;
       },
+      // Make REST call to server
       go: function() {
         var loader = this.$.classLoader;
         loader.params = {};
@@ -43,6 +45,7 @@
         loader.generateRequest();
         console.log('Fired request');
       },
+      // Initialize web-component data
       properties: {
         _selfRIN: {
           type: String,
@@ -52,14 +55,17 @@
           type: String,
           notify: true
         },
+        // URL to send REST request to
         targetURL: {
           type: String,
           notify: true
         },
+        // REST reply object
         classDetails: {
           type: Object,
           notify: true,
-          value: {replyObject:[{CRN: 0, Name: 'loading...'}, {CRN: 1, Name: 'loading...'}]}
+          value: {replyObject:[{CRN: 0, Name: 'loading...'},
+            {CRN: 1, Name: 'loading...'}]}
         }
       }
     });

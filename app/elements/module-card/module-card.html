@@ -10,6 +10,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
 
+<!-- Custom WebComponent for showing information about a module on the TimeShift
+     Dashboard -->
 <dom-module id='module-card'>
   <template>
     <style>
@@ -46,12 +48,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           observer: '_moduleChanged'
         } 
       },
-
+      /*
+       * If the module has a custom web component for displaying extra data
+       * on the dashboard, then load that web component and embed it in the 
+       * original card
+       */
       _moduleChanged: function(){
         if(this.module.moduleCardElement){
           var addlContentDiv = this.$.additionalContent;
-          var addlContent = document.createElement(this.module.moduleCardElement);
+          // Instantiate module's custom component
+          var addlContent = document
+            .createElement(this.module.moduleCardElement);
+
           addlContent.module = this.module;
+          // Embed custom component in dasboard card
           Polymer.dom(addlContentDiv).appendChild(addlContent);
         }
       },

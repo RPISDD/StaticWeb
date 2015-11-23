@@ -9,7 +9,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../../bower_components/polymer/polymer.html">
-
+<!-- Custom WebComponent for creating a web page for a module -->
 <dom-module id="module-page">
   <template>
     <style>
@@ -25,16 +25,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <script>
   (function() {
     'use strict';
-
     Polymer({
       is: 'module-page',
-
       properties: {
         module: {
           type: Object
-
         },
       },
+      /*
+       * This web component serves as a generic wrapper for a module's custom
+       * content. This script loads a module's unique content 
+       */
       loadChild: function(){
           var childPage = document.createElement(this.module.modulePageElement);
           childPage.module = this.module;

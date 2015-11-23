@@ -45,6 +45,7 @@
         switchLogin: function() {
           landing.welcomeRoute='login';
         },
+        // Load the signup page
         switchSignup: function() {
           landing.welcomeRoute='signup';
         }
@@ -64,9 +65,11 @@
       </form>
     </template>
     <script>
+      // Initialize the login form
       Polymer({
         is: 'ts-login',
         ready: function(){
+          // Create event handlers for form submission
           this.$.loginForm.addEventListener('iron-form-response', document.tsLogin);
           this.$.loginForm.addEventListener('iron-form-submit', document.tsPreLogin);
         },
@@ -99,9 +102,11 @@
         </form>
     </template>
     <script>
+      // Initialize the signup form
       Polymer({
         is: 'ts-signup',
         ready: function(){
+          // Create event handlers for form submission
           this.$.signupForm.addEventListener('iron-form-response', document.tsLogin);
           this.$.signupForm.addEventListener('iron-form-submit', document.tsPreLogin);
         },
@@ -120,6 +125,7 @@
         <div class='app-name'>TimeShift</div>
       </div>
     </paper-toolbar>
+    <!-- Handles in-app routing for welcome page -->
     <iron-pages id='welcomeRouter' attr-for-selected='data-route' selected='{{welcomeRoute}}'>
       <section data-route='welcome'>
         <ts-welcome></ts-welcome>

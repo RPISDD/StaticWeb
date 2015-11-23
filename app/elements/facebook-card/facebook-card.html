@@ -11,10 +11,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel='import' href='../../bower_components/polymer/polymer.html'>
 <link rel='import' href='../../bower_components/facebook-login/dist/facebook-login.html'>
 
+<!-- Web component to be inserted in Facebook module dashboard 'Paper Card' -->
 <dom-module id='facebook-card'>
-  <!-- Contains the source code for the web page -->
   <template>
     <div id='fb-login'>
+      <!-- Use Facebook Login web component -->
       <facebook-login
         appID='1660606690823431'
         logout-link
@@ -71,7 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           if(fbId === undefined){
             return;
           }
-          // Send data to module
+          // Send data to Node.JS Facebook module
           $.ajax({
             type: 'POST',
             headers: document.getTokenHeader(),
@@ -82,6 +83,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             data: JSON.stringify({fbId: fbId, friendsList:friends})
           });
         };
+        // Handle replies from Facebook
         this.$.loginButton.addEventListener('graph-response', function(response){
            handleResponse(response);
         });

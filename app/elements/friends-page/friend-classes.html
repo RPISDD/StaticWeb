@@ -3,16 +3,14 @@
 
 <dom-module id='friend-classes'>
   <template>
-    <iron-ajax
-      id='classLoader'
-      url='[[targetURL]]'
-      headers='{{_makeHeaders()}}'
-      handle-as='json'
-      last-response='{{friendClasses}}'>
+    <!-- Custom web component to get data from server -->
+    <iron-ajax id='classLoader' url='[[targetURL]]' headers='{{_makeHeaders()}}'
+      handle-as='json' last-response='{{friendClasses}}'>
     </iron-ajax>
     <ul>
     <template is='dom-repeat' items='[[friendClasses.replyObject]]'>
       <li>
+        <!-- Create bulleted list of friend's classes -->
         <span>[[item.className]]</span>: 
         <ul>
           <template is='dom-repeat' items='[[item.classTime]]'>
@@ -28,12 +26,15 @@
     'use strict';
     Polymer({
       is: 'friend-classes',
+      // Generate HTTP request headers
       _makeHeaders: function() {
         return document.getTokenHeader();
       },
+      // Get current user's RIN
       _getSelfRIN: function() {
         return document.getRIN();
       },
+      // Generate HTTP Query String
       _getAjaxParams: function() {
         var params = { 
           friendRIN: this.friendRIN,
@@ -42,6 +43,7 @@
         console.log('Sending AJAX params', params);
         return params;
       },
+      // Send REST request to server
       go: function() {
         var loader = this.$.classLoader;
         loader.params = {};

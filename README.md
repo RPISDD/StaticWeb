@@ -13,4 +13,6 @@ Run commands from root StaticWeb directory:
 3. Run `gulp`
 
 # Running Local Server
+NOTE: this only serves static web content
+
 Run command from root StaticWeb directory: `gulp serve`
