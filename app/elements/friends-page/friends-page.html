@@ -123,11 +123,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this.$.addFriendForm.addEventListener('iron-form-submit', document.tsPreAddFriend);
       },
       addFriendSubmit: function() {
+        var friendsListLoader = this.$.friendsListLoader;
         // If we added a new friend, then we need to reload our list
         setTimeout(function(){
-          console.log('Updated friends list');
-          this.$.friendsListLoader.generateRequest();
-        }, 1000);
+          console.log('Updated friends list, using', friendsListLoader);
+          friendsListLoader.generateRequest();
+        }, 3000);
         this.$.addFriendForm.submit();
       }
     });
