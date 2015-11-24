@@ -32,6 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
     <div style='margin:10px'>
+    <!-- Form to add a friend -->
     <form is='iron-form' id='addFriendForm' method='post' 
       headers='{{makeHeaders()}}' action='/api/tsFriends'>
 
@@ -43,6 +44,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </form>
     </div>
     <div style='margin:10px'>
+    <!-- Create a paper card for every friend  -->
     <template is="dom-repeat" items="[[friendsList.replyObject]]">
       <paper-material class='friendcard' elevation="2"
         onclick='[[showFriendClasses(item.RIN, module.ajaxResources.friendClasses)]]'>  
